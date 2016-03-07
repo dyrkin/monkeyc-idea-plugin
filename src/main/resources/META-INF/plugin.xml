@@ -1,0 +1,78 @@
+<idea-plugin url="https://github.com/liias/MonkeyC" version="2">
+  <id>com.dyrkin.monkeyc.idea.plugin</id>
+  <name>Connect IQ Plugin</name>
+  <version>0.0.1</version>
+  <vendor email="untrance@gmail.com">Eugene Zadyra</vendor>
+
+  <description></description>
+
+  <change-notes>
+  </change-notes>
+
+
+  <idea-version since-build="140.1532"/>
+
+
+  <depends>com.intellij.modules.lang</depends>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <!--<sdkType implementation="ee.edio.garmin.sdk.MonkeySdkType"/>-->
+
+    <!-- Add your extensions here -->
+    <fileTypeFactory implementation="com.dyrkin.monkeyc.idea.plugin.MonkeyFileTypeFactory"/>
+    <!--<lang.braceMatcher language="MonkeyC" implementationClass="ee.edio.garmin.editor.MonkeyPairedBraceMather"/>-->
+    <!--<lang.commenter language="MonkeyC" implementationClass="ee.edio.garmin.MonkeyCommenter"/>-->
+    <!--<lang.documentationProvider language="MonkeyC"-->
+                                <!--implementationClass="ee.edio.garmin.documentation.MonkeyDocumentationProvider"/>-->
+    <!--<lang.elementManipulator forClass="ee.edio.garmin.psi.impl.MonkeyStringLiteralImpl"-->
+                             <!--implementationClass="ee.edio.garmin.psi.impl.manipulators.MonkeyStringManipulator"/>-->
+    <!--<lang.findUsagesProvider language="MonkeyC" implementationClass="ee.edio.garmin.MonkeyFindUsagesProvider"/>-->
+    <!--<lang.foldingBuilder language="MonkeyC" implementationClass="ee.edio.garmin.editor.MonkeyFoldingBuilder"/>-->
+    <!--<lang.formatter language="MonkeyC" implementationClass="ee.edio.garmin.formatter.MonkeyFormattingModelBuilder"/>-->
+
+    <lang.parserDefinition language="MonkeyC" implementationClass="com.dyrkin.monkeyc.idea.plugin.MonkeyParserDefinition"/>
+    <!--<lang.psiStructureViewFactory language="MonkeyC"-->
+                                  <!--implementationClass="ee.edio.garmin.structure.MonkeyStructureViewBuilderFactory"/>-->
+
+    <!--<lang.refactoringSupport language="MonkeyC" implementationClass="ee.edio.garmin.MonkeyRefactoringSupportProvider"/>-->
+    <lang.syntaxHighlighterFactory language="MonkeyC" implementationClass="com.dyrkin.monkeyc.idea.plugin.MonkeySyntaxHighlighterFactory"/>
+    <!--<colorSettingsPage implementation="ee.edio.garmin.MonkeyColorSettingsPage"/>-->
+
+    <!--<completion.contributor language="MonkeyC"-->
+                            <!--implementationClass="ee.edio.garmin.completion.MonkeyCompletionContributor"/>-->
+
+    <!--<fileTemplateGroup implementation="ee.edio.garmin.ide.fileTemplates.MonkeyFileTemplateProvider"/>-->
+
+    <!--<projectTemplatesFactory implementation="ee.edio.garmin.module.newProject.MonkeyProjectTemplatesFactory"/>-->
+
+    <!--<gotoClassContributor implementation="ee.edio.garmin.MonkeyGoToClassContributor"/>-->
+
+    <!--<internalFileTemplate name="Monkey C File"/>-->
+
+    <!--&lt;!&ndash; run application &ndash;&gt;-->
+    <!--<programRunner id="MonkeyCRunner" implementation="ee.edio.garmin.runconfig.MonkeyProgramRunner"/>-->
+    <!--<runConfigurationProducer implementation="ee.edio.garmin.runconfig.MonkeyModuleConfigurationProducer"/>-->
+    <!--<configurationType implementation="ee.edio.garmin.runconfig.MonkeyConfigurationType"/>-->
+
+    <!--<moduleExtension implementation="ee.edio.garmin.configuration.TargetDeviceModuleExtension"/>-->
+
+    <!--<dom.fileDescription implementation="ee.edio.garmin.dom.manifest.ManifestDomFileDescription"/>-->
+    <!--<dom.fileDescription implementation="ee.edio.garmin.dom.sdk.projectinfo.ProjectInfoDomFileDescription"/>-->
+  </extensions>
+
+  <application-components>
+    <!-- Add your application components here -->
+  </application-components>
+
+  <project-components>
+    <!-- Add your project components here -->
+  </project-components>
+
+  <actions>
+    <!--<action id="Monkey.NewMonkeyFile" class="ee.edio.garmin.ide.actions.CreateMonkeyFileAction"-->
+            <!--text="Monkey C File" description="Create new Monkey C source file">-->
+      <!--<add-to-group group-id="NewGroup" anchor="before" relative-to-action="NewFromTemplate"/>-->
+    <!--</action>-->
+  </actions>
+
+</idea-plugin>
