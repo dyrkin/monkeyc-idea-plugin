@@ -50,7 +50,7 @@ class MonkeyReferenceExpressionBase(node: ASTNode) extends MonkeyPsiCompositeEle
   def lookAtClassBody() = {
     val clazz = findParentClass()
     clazz flatMap { f =>
-      val variables = f.getClassVariableNameElements
+      val variables = f.getClassVariableNameElements ++ f.getClassConstNameElements
       val res: Array[PsiReference] = variables.filter(_.getText == text).map { v =>
         new MonkeyVariableReference(this, text, v)
       }.toArray
