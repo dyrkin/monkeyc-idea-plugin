@@ -5,7 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface MonkeyBitwiseExpression extends MonkeyExpression {
+public interface MonkeyBitwiseExpression extends MonkeyPsiCompositeElement {
 
   @NotNull
   List<MonkeyBitwiseOperator> getBitwiseOperatorList();

@@ -1,7 +1,6 @@
 package com.dyrkin.monkeyc.idea.plugin.psi.impl;
 
 
-import com.dyrkin.monkeyc.idea.plugin.MonkeyStringLiteralEscaper;
 import com.dyrkin.monkeyc.idea.plugin.psi.MonkeyStringLiteral;
 import com.dyrkin.monkeyc.idea.plugin.psi.MonkeyTypes;
 import com.intellij.lang.ASTNode;

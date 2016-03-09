@@ -129,7 +129,7 @@ tokens = [
     CHARLITERAL = "regexp:('([^'\\]|\\.)*')"
   ]
 
-  extends(".*Expression")="expression"
+  //extends(".*Expression")="expression"
 }
 
 monkeyCFile ::= compilationUnit*
@@ -137,14 +137,21 @@ monkeyCFile ::= compilationUnit*
 private compilationUnit ::= usingDeclaration | moduleDeclaration | constDeclaration | fieldDeclaration
                           | functionDeclaration | classDeclaration | blockStatement | SEMI
 
-usingDeclaration ::= USING qualifiedName (AS componentName)? SEMI {pin=1}
+usingDeclaration ::= USING usingReference (AS asReference)? SEMI {pin=1}
+
+usingReference ::= qualifiedName
+
+asReference ::= componentName{mixin="com.dyrkin.monkeyc.idea.plugin.psi.reference.MonkeyAsReferenceElementBase"}
 
 moduleDeclaration ::= modifiers MODULE componentName moduleBody
 
 moduleBody ::= classBody
 
-classDeclaration ::= modifiers CLASS componentName (EXTENDS type)? classBody
+classDeclaration ::= modifiers CLASS className (EXTENDS type)? classBody
                    | modifiers ENUM componentName? enumBody
+                   {mixin="com.dyrkin.monkeyc.idea.plugin.psi.base.MonkeyClassDeclarationBase"}
+
+className ::= componentName
 
 modifiers ::= annotation? STATIC? HIDDEN?
 
@@ -163,16 +170,14 @@ classBody ::= LBRACE classBodyDeclaration* RBRACE
 classBodyDeclaration ::= usingDeclaration | block | constDeclaration | fieldDeclaration | functionDeclaration | classDeclaration | SEMI
 
 componentName ::= id
-{mixin="com.dyrkin.monkeyc.idea.plugin.psi.impl.MonkeyNamedElementImpl" implements="com.dyrkin.monkeyc.idea.plugin.psi.MonkeyNamedElement"}
+{mixin="com.dyrkin.monkeyc.idea.plugin.psi.reference.MonkeyUsingReferenceElementBase"}
 
 id ::= IDENTIFIER
 
 functionDeclaration ::= modifiers FUNCTION componentName formalParameters (THROWS qualifiedNameList)?
                         LBRACE (explicitConstructorInvocation)? (blockStatement)* RBRACE {
   pin=3
-  mixin="com.dyrkin.monkeyc.idea.plugin.psi.impl.AbstractMonkeyComponentImpl"
-  implements="com.dyrkin.monkeyc.idea.plugin.psi.MonkeyComponent"
-  //methods=[getKey getValue setName getNameIdentifier]
+  mixin="com.dyrkin.monkeyc.idea.plugin.psi.base.MonkeyFunctionDeclarationBase"
 }
 
 constDeclaration ::= modifiers CONST variableDeclarator SEMI
@@ -180,7 +185,8 @@ constDeclaration ::= modifiers CONST variableDeclarator SEMI
 fieldDeclaration ::= modifiers VAR variableDeclarator
                     (COMMA variableDeclarator)* SEMI
 
-variableDeclarator ::= componentName (LBRACKET RBRACKET)* (EQ variableInitializer)?
+variableDeclarator ::= variableDeclarationName (LBRACKET RBRACKET)* (EQ variableInitializer)?
+variableDeclarationName ::= componentName {mixin="com.dyrkin.monkeyc.idea.plugin.psi.base.MonkeyVariableDeclarationNameBase"}
 type ::= qualifiedName (LBRACKET RBRACKET)*
 
 qualifiedNameList ::= qualifiedName (COMMA qualifiedName)*
@@ -189,7 +195,7 @@ formalParameters ::= LPAREN (formalParameterDecls)? RPAREN
 
 formalParameterDecls ::= normalParameterDecl (COMMA normalParameterDecl)*
 
-normalParameterDecl ::= componentName (LBRACKET RBRACKET)*
+normalParameterDecl ::= componentName (LBRACKET RBRACKET)* {mixin="com.dyrkin.monkeyc.idea.plugin.psi.base.MonkeyVariableDeclarationNameBase"}
 
 //NOTE: the position of Identifier 'super' is set to the type args position here
 explicitConstructorInvocation ::= SUPER arguments SEMI
@@ -319,10 +325,8 @@ primary ::= parExpression
 
 }
 
-//referenceExpression ::= id {
 referenceExpression ::= componentName {
-  mixin="com.dyrkin.monkeyc.idea.plugin.psi.impl.MonkeyReferenceImpl"
-  implements="com.dyrkin.monkeyc.idea.plugin.psi.MonkeyReference"
+  mixin="com.dyrkin.monkeyc.idea.plugin.psi.reference.MonkeyReferenceExpressionBase"
 }
 
 qualifiedReferenceExpression ::= DOT referenceExpression {elementType="referenceExpression"}

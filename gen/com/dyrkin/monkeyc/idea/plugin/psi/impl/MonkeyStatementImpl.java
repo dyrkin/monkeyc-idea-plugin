@@ -40,6 +40,18 @@ public class MonkeyStatementImpl extends MonkeyPsiCompositeElementImpl implement
   }
 
   @Override
+  @Nullable
+  public MonkeyParExpression getParExpression() {
+    return findChildByClass(MonkeyParExpression.class);
+  }
+
+  @Override
+  @Nullable
+  public MonkeyReferenceExpression getReferenceExpression() {
+    return findChildByClass(MonkeyReferenceExpression.class);
+  }
+
+  @Override
   @NotNull
   public List<MonkeyStatement> getStatementList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, MonkeyStatement.class);

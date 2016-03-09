@@ -1,4 +1,4 @@
-package com.dyrkin.monkeyc.idea.plugin;
+package com.dyrkin.monkeyc.idea.plugin.psi.impl;
 
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.LiteralTextEscaper;

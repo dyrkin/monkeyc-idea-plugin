@@ -23,8 +23,8 @@ public class MonkeyVariableDeclaratorImpl extends MonkeyPsiCompositeElementImpl 
 
   @Override
   @NotNull
-  public MonkeyComponentName getComponentName() {
-    return findNotNullChildByClass(MonkeyComponentName.class);
+  public MonkeyVariableDeclarationName getVariableDeclarationName() {
+    return findNotNullChildByClass(MonkeyVariableDeclarationName.class);
   }
 
   @Override

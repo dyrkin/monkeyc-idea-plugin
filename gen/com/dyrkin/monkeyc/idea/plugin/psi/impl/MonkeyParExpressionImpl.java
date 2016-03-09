@@ -10,7 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.dyrkin.monkeyc.idea.plugin.psi.MonkeyTypes.*;
 import com.dyrkin.monkeyc.idea.plugin.psi.*;
 
-public class MonkeyParExpressionImpl extends MonkeyExpressionImpl implements MonkeyParExpression {
+public class MonkeyParExpressionImpl extends MonkeyPsiCompositeElementImpl implements MonkeyParExpression {
 
   public MonkeyParExpressionImpl(ASTNode node) {
     super(node);

@@ -11,6 +11,9 @@ public interface MonkeyExpression extends MonkeyPsiCompositeElement {
   MonkeyAssignmentOperator getAssignmentOperator();
 
   @NotNull
-  List<MonkeyExpression> getExpressionList();
+  MonkeyConditionalExpression getConditionalExpression();
+
+  @Nullable
+  MonkeyExpression getExpression();
 
 }

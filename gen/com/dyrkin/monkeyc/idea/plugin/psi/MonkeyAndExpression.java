@@ -5,9 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface MonkeyAndExpression extends MonkeyExpression {
+public interface MonkeyAndExpression extends MonkeyPsiCompositeElement {
 
   @NotNull
-  List<MonkeyExpression> getExpressionList();
+  List<MonkeyEqualityExpression> getEqualityExpressionList();
 
 }

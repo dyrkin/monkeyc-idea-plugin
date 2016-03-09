@@ -10,7 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.dyrkin.monkeyc.idea.plugin.psi.MonkeyTypes.*;
 import com.dyrkin.monkeyc.idea.plugin.psi.*;
 
-public class MonkeyHasExpressionImpl extends MonkeyExpressionImpl implements MonkeyHasExpression {
+public class MonkeyHasExpressionImpl extends MonkeyPsiCompositeElementImpl implements MonkeyHasExpression {
 
   public MonkeyHasExpressionImpl(ASTNode node) {
     super(node);
@@ -23,8 +23,8 @@ public class MonkeyHasExpressionImpl extends MonkeyExpressionImpl implements Mon
 
   @Override
   @NotNull
-  public MonkeyExpression getExpression() {
-    return findNotNullChildByClass(MonkeyExpression.class);
+  public MonkeyInstanceOfExpression getInstanceOfExpression() {
+    return findNotNullChildByClass(MonkeyInstanceOfExpression.class);
   }
 
   @Override

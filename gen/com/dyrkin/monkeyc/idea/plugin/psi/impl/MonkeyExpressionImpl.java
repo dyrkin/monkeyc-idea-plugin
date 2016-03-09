@@ -29,8 +29,14 @@ public class MonkeyExpressionImpl extends MonkeyPsiCompositeElementImpl implemen
 
   @Override
   @NotNull
-  public List<MonkeyExpression> getExpressionList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, MonkeyExpression.class);
+  public MonkeyConditionalExpression getConditionalExpression() {
+    return findNotNullChildByClass(MonkeyConditionalExpression.class);
+  }
+
+  @Override
+  @Nullable
+  public MonkeyExpression getExpression() {
+    return findChildByClass(MonkeyExpression.class);
   }
 
 }

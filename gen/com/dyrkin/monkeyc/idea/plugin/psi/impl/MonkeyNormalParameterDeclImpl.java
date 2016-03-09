@@ -8,9 +8,10 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.dyrkin.monkeyc.idea.plugin.psi.MonkeyTypes.*;
+import com.dyrkin.monkeyc.idea.plugin.psi.base.MonkeyVariableDeclarationNameBase;
 import com.dyrkin.monkeyc.idea.plugin.psi.*;
 
-public class MonkeyNormalParameterDeclImpl extends MonkeyPsiCompositeElementImpl implements MonkeyNormalParameterDecl {
+public class MonkeyNormalParameterDeclImpl extends MonkeyVariableDeclarationNameBase implements MonkeyNormalParameterDecl {
 
   public MonkeyNormalParameterDeclImpl(ASTNode node) {
     super(node);

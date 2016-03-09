@@ -10,7 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.dyrkin.monkeyc.idea.plugin.psi.MonkeyTypes.*;
 import com.dyrkin.monkeyc.idea.plugin.psi.*;
 
-public class MonkeyShiftExpressionImpl extends MonkeyExpressionImpl implements MonkeyShiftExpression {
+public class MonkeyShiftExpressionImpl extends MonkeyPsiCompositeElementImpl implements MonkeyShiftExpression {
 
   public MonkeyShiftExpressionImpl(ASTNode node) {
     super(node);
@@ -23,8 +23,8 @@ public class MonkeyShiftExpressionImpl extends MonkeyExpressionImpl implements M
 
   @Override
   @NotNull
-  public List<MonkeyExpression> getExpressionList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, MonkeyExpression.class);
+  public List<MonkeyAdditiveExpression> getAdditiveExpressionList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, MonkeyAdditiveExpression.class);
   }
 
   @Override

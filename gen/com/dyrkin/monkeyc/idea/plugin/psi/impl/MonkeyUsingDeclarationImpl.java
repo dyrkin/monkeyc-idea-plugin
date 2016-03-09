@@ -23,14 +23,14 @@ public class MonkeyUsingDeclarationImpl extends MonkeyPsiCompositeElementImpl im
 
   @Override
   @Nullable
-  public MonkeyComponentName getComponentName() {
-    return findChildByClass(MonkeyComponentName.class);
+  public MonkeyAsReference getAsReference() {
+    return findChildByClass(MonkeyAsReference.class);
   }
 
   @Override
   @Nullable
-  public MonkeyQualifiedName getQualifiedName() {
-    return findChildByClass(MonkeyQualifiedName.class);
+  public MonkeyUsingReference getUsingReference() {
+    return findChildByClass(MonkeyUsingReference.class);
   }
 
 }

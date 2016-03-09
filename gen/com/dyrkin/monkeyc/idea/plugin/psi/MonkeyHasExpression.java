@@ -5,10 +5,10 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface MonkeyHasExpression extends MonkeyExpression {
+public interface MonkeyHasExpression extends MonkeyPsiCompositeElement {
 
   @NotNull
-  MonkeyExpression getExpression();
+  MonkeyInstanceOfExpression getInstanceOfExpression();
 
   @Nullable
   MonkeySymbol getSymbol();

@@ -15,6 +15,7 @@ public interface MonkeyTypes {
   IElementType ARRAY_CREATOR = new MonkeyElementType("ARRAY_CREATOR");
   IElementType ARRAY_INITIALIZER = new MonkeyElementType("ARRAY_INITIALIZER");
   IElementType ASSIGNMENT_OPERATOR = new MonkeyElementType("ASSIGNMENT_OPERATOR");
+  IElementType AS_REFERENCE = new MonkeyElementType("AS_REFERENCE");
   IElementType BITWISE_EXPRESSION = new MonkeyElementType("BITWISE_EXPRESSION");
   IElementType BITWISE_OPERATOR = new MonkeyElementType("BITWISE_OPERATOR");
   IElementType BLOCK = new MonkeyElementType("BLOCK");
@@ -26,6 +27,7 @@ public interface MonkeyTypes {
   IElementType CLASS_BODY_DECLARATION = new MonkeyElementType("CLASS_BODY_DECLARATION");
   IElementType CLASS_CREATOR_REST = new MonkeyElementType("CLASS_CREATOR_REST");
   IElementType CLASS_DECLARATION = new MonkeyElementType("CLASS_DECLARATION");
+  IElementType CLASS_NAME = new MonkeyElementType("CLASS_NAME");
   IElementType COMPONENT_NAME = new MonkeyElementType("COMPONENT_NAME");
   IElementType CONDITIONAL_AND_EXPRESSION = new MonkeyElementType("CONDITIONAL_AND_EXPRESSION");
   IElementType CONDITIONAL_EXPRESSION = new MonkeyElementType("CONDITIONAL_EXPRESSION");
@@ -84,6 +86,8 @@ public interface MonkeyTypes {
   IElementType UNARY_EXPRESSION = new MonkeyElementType("UNARY_EXPRESSION");
   IElementType UNARY_EXPRESSION_NOT_PLUS_MINUS = new MonkeyElementType("UNARY_EXPRESSION_NOT_PLUS_MINUS");
   IElementType USING_DECLARATION = new MonkeyElementType("USING_DECLARATION");
+  IElementType USING_REFERENCE = new MonkeyElementType("USING_REFERENCE");
+  IElementType VARIABLE_DECLARATION_NAME = new MonkeyElementType("VARIABLE_DECLARATION_NAME");
   IElementType VARIABLE_DECLARATOR = new MonkeyElementType("VARIABLE_DECLARATOR");
   IElementType VARIABLE_INITIALIZER = new MonkeyElementType("VARIABLE_INITIALIZER");
 
@@ -203,6 +207,9 @@ public interface MonkeyTypes {
       else if (type == ASSIGNMENT_OPERATOR) {
         return new MonkeyAssignmentOperatorImpl(node);
       }
+      else if (type == AS_REFERENCE) {
+        return new MonkeyAsReferenceImpl(node);
+      }
       else if (type == BITWISE_EXPRESSION) {
         return new MonkeyBitwiseExpressionImpl(node);
       }
@@ -235,6 +242,9 @@ public interface MonkeyTypes {
       }
       else if (type == CLASS_DECLARATION) {
         return new MonkeyClassDeclarationImpl(node);
+      }
+      else if (type == CLASS_NAME) {
+        return new MonkeyClassNameImpl(node);
       }
       else if (type == COMPONENT_NAME) {
         return new MonkeyComponentNameImpl(node);
@@ -409,6 +419,12 @@ public interface MonkeyTypes {
       }
       else if (type == USING_DECLARATION) {
         return new MonkeyUsingDeclarationImpl(node);
+      }
+      else if (type == USING_REFERENCE) {
+        return new MonkeyUsingReferenceImpl(node);
+      }
+      else if (type == VARIABLE_DECLARATION_NAME) {
+        return new MonkeyVariableDeclarationNameImpl(node);
       }
       else if (type == VARIABLE_DECLARATOR) {
         return new MonkeyVariableDeclaratorImpl(node);

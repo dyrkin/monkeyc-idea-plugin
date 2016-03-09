@@ -8,9 +8,10 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.dyrkin.monkeyc.idea.plugin.psi.MonkeyTypes.*;
+import com.dyrkin.monkeyc.idea.plugin.psi.base.MonkeyClassDeclarationBase;
 import com.dyrkin.monkeyc.idea.plugin.psi.*;
 
-public class MonkeyClassDeclarationImpl extends MonkeyPsiCompositeElementImpl implements MonkeyClassDeclaration {
+public class MonkeyClassDeclarationImpl extends MonkeyClassDeclarationBase implements MonkeyClassDeclaration {
 
   public MonkeyClassDeclarationImpl(ASTNode node) {
     super(node);
@@ -25,6 +26,12 @@ public class MonkeyClassDeclarationImpl extends MonkeyPsiCompositeElementImpl im
   @Nullable
   public MonkeyClassBody getClassBody() {
     return findChildByClass(MonkeyClassBody.class);
+  }
+
+  @Override
+  @Nullable
+  public MonkeyClassName getClassName() {
+    return findChildByClass(MonkeyClassName.class);
   }
 
   @Override

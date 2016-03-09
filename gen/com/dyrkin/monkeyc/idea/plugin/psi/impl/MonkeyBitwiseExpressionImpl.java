@@ -10,7 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.dyrkin.monkeyc.idea.plugin.psi.MonkeyTypes.*;
 import com.dyrkin.monkeyc.idea.plugin.psi.*;
 
-public class MonkeyBitwiseExpressionImpl extends MonkeyExpressionImpl implements MonkeyBitwiseExpression {
+public class MonkeyBitwiseExpressionImpl extends MonkeyPsiCompositeElementImpl implements MonkeyBitwiseExpression {
 
   public MonkeyBitwiseExpressionImpl(ASTNode node) {
     super(node);

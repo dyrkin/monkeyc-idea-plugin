@@ -8,7 +8,7 @@ import com.intellij.psi.PsiElement;
 public interface MonkeyVariableDeclarator extends MonkeyPsiCompositeElement {
 
   @NotNull
-  MonkeyComponentName getComponentName();
+  MonkeyVariableDeclarationName getVariableDeclarationName();
 
   @Nullable
   MonkeyVariableInitializer getVariableInitializer();

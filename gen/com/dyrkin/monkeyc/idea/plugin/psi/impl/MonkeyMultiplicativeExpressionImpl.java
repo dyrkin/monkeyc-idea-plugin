@@ -10,7 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.dyrkin.monkeyc.idea.plugin.psi.MonkeyTypes.*;
 import com.dyrkin.monkeyc.idea.plugin.psi.*;
 
-public class MonkeyMultiplicativeExpressionImpl extends MonkeyExpressionImpl implements MonkeyMultiplicativeExpression {
+public class MonkeyMultiplicativeExpressionImpl extends MonkeyPsiCompositeElementImpl implements MonkeyMultiplicativeExpression {
 
   public MonkeyMultiplicativeExpressionImpl(ASTNode node) {
     super(node);
@@ -23,8 +23,14 @@ public class MonkeyMultiplicativeExpressionImpl extends MonkeyExpressionImpl imp
 
   @Override
   @NotNull
-  public List<MonkeyExpression> getExpressionList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, MonkeyExpression.class);
+  public MonkeyBitwiseExpression getBitwiseExpression() {
+    return findNotNullChildByClass(MonkeyBitwiseExpression.class);
+  }
+
+  @Override
+  @NotNull
+  public List<MonkeyUnaryExpression> getUnaryExpressionList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, MonkeyUnaryExpression.class);
   }
 
 }

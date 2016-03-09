@@ -11,6 +11,9 @@ public interface MonkeyClassDeclaration extends MonkeyPsiCompositeElement {
   MonkeyClassBody getClassBody();
 
   @Nullable
+  MonkeyClassName getClassName();
+
+  @Nullable
   MonkeyComponentName getComponentName();
 
   @Nullable

@@ -10,7 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.dyrkin.monkeyc.idea.plugin.psi.MonkeyTypes.*;
 import com.dyrkin.monkeyc.idea.plugin.psi.*;
 
-public class MonkeyUnaryExpressionImpl extends MonkeyExpressionImpl implements MonkeyUnaryExpression {
+public class MonkeyUnaryExpressionImpl extends MonkeyPsiCompositeElementImpl implements MonkeyUnaryExpression {
 
   public MonkeyUnaryExpressionImpl(ASTNode node) {
     super(node);

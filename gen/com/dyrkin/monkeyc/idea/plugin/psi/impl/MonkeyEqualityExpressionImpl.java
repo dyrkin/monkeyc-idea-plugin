@@ -10,7 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.dyrkin.monkeyc.idea.plugin.psi.MonkeyTypes.*;
 import com.dyrkin.monkeyc.idea.plugin.psi.*;
 
-public class MonkeyEqualityExpressionImpl extends MonkeyExpressionImpl implements MonkeyEqualityExpression {
+public class MonkeyEqualityExpressionImpl extends MonkeyPsiCompositeElementImpl implements MonkeyEqualityExpression {
 
   public MonkeyEqualityExpressionImpl(ASTNode node) {
     super(node);
@@ -23,8 +23,8 @@ public class MonkeyEqualityExpressionImpl extends MonkeyExpressionImpl implement
 
   @Override
   @NotNull
-  public List<MonkeyExpression> getExpressionList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, MonkeyExpression.class);
+  public List<MonkeyHasExpression> getHasExpressionList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, MonkeyHasExpression.class);
   }
 
 }

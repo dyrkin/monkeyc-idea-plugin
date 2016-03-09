@@ -1,11 +1,10 @@
 // This is a generated file. Not intended for manual editing.
 package com.dyrkin.monkeyc.idea.plugin.psi;
 
-import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiLanguageInjectionHost;
-import com.dyrkin.monkeyc.idea.plugin.MonkeyStringLiteralEscaper;
+import com.dyrkin.monkeyc.idea.plugin.psi.impl.MonkeyStringLiteralEscaper;
 
 public interface MonkeyStringLiteral extends PsiLanguageInjectionHost {
 

@@ -10,7 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.dyrkin.monkeyc.idea.plugin.psi.MonkeyTypes.*;
 import com.dyrkin.monkeyc.idea.plugin.psi.*;
 
-public class MonkeyConditionalOrExpressionImpl extends MonkeyExpressionImpl implements MonkeyConditionalOrExpression {
+public class MonkeyConditionalOrExpressionImpl extends MonkeyPsiCompositeElementImpl implements MonkeyConditionalOrExpression {
 
   public MonkeyConditionalOrExpressionImpl(ASTNode node) {
     super(node);
@@ -23,8 +23,8 @@ public class MonkeyConditionalOrExpressionImpl extends MonkeyExpressionImpl impl
 
   @Override
   @NotNull
-  public List<MonkeyExpression> getExpressionList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, MonkeyExpression.class);
+  public List<MonkeyConditionalAndExpression> getConditionalAndExpressionList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, MonkeyConditionalAndExpression.class);
   }
 
 }

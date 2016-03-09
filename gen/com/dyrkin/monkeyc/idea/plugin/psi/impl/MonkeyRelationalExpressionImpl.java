@@ -10,7 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.dyrkin.monkeyc.idea.plugin.psi.MonkeyTypes.*;
 import com.dyrkin.monkeyc.idea.plugin.psi.*;
 
-public class MonkeyRelationalExpressionImpl extends MonkeyExpressionImpl implements MonkeyRelationalExpression {
+public class MonkeyRelationalExpressionImpl extends MonkeyPsiCompositeElementImpl implements MonkeyRelationalExpression {
 
   public MonkeyRelationalExpressionImpl(ASTNode node) {
     super(node);
@@ -23,14 +23,14 @@ public class MonkeyRelationalExpressionImpl extends MonkeyExpressionImpl impleme
 
   @Override
   @NotNull
-  public List<MonkeyExpression> getExpressionList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, MonkeyExpression.class);
+  public List<MonkeyRelationalOp> getRelationalOpList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, MonkeyRelationalOp.class);
   }
 
   @Override
   @NotNull
-  public List<MonkeyRelationalOp> getRelationalOpList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, MonkeyRelationalOp.class);
+  public List<MonkeyShiftExpression> getShiftExpressionList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, MonkeyShiftExpression.class);
   }
 
 }
