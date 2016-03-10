@@ -3,7 +3,6 @@ package com.dyrkin.monkeyc.idea.plugin.sdk
 import java.io.File
 import javax.swing.Icon
 
-import com.dyrkin.monkeyc.idea.plugin
 import com.dyrkin.monkeyc.idea.plugin._
 import com.intellij.openapi.projectRoots._
 import org.jdom.Element
@@ -27,12 +26,9 @@ class ConnectIQSdk extends SdkType("Connect IQ SDK") {
   override def createAdditionalDataConfigurable(sdkModel: SdkModel, sdkModificator: SdkModificator): AdditionalDataConfigurable = null
 
   override def isValidSdkHome(homePath: String): Boolean = {
-    val bin = new File(homePath, "bin").getAbsoluteFile
-    val monkeyc = new File(bin, os("monkeyc", ext = ".bat"))
-    val shell = new File(bin, os("shell"))
-    val connectiq = new File(bin, os("connectiq", ext = ".bat"))
+    val sdkFiles = new SdkFiles(homePath)
 
-    monkeyc.exists() && shell.exists() && connectiq.exists()
+    sdkFiles.monkeyc.exists() && sdkFiles.shell.exists() && sdkFiles.connectiq.exists()
   }
 
   override def getPresentableName: String = "Connect IQ SDK"
@@ -45,9 +41,7 @@ class ConnectIQSdk extends SdkType("Connect IQ SDK") {
 
   override def getIconForAddAction: Icon = MonkeyIcons.Add_Sdk
 
-  override def getVersionString(sdkHome: String): String = {
-    extractSdkVersion(sdkHome)
-  }
+  override def getVersionString(sdkHome: String): String = extractSdkVersion(sdkHome)
 
   val VersionRegexp = ".*(\\d+\\.\\d+\\.\\d+).*".r
 
