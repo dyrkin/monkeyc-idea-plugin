@@ -21,6 +21,8 @@
 
         <!-- Add your extensions here -->
         <fileTypeFactory implementation="com.dyrkin.monkeyc.idea.plugin.MonkeyFileTypeFactory"/>
+
+        <sdkType implementation="com.dyrkin.monkeyc.idea.plugin.sdk.ConnectIQSdk"/>
         <!--<lang.braceMatcher language="MonkeyC" implementationClass="ee.edio.garmin.editor.MonkeyPairedBraceMather"/>-->
         <!--<lang.commenter language="MonkeyC" implementationClass="ee.edio.garmin.MonkeyCommenter"/>-->
         <!--<lang.documentationProvider language="MonkeyC"-->
