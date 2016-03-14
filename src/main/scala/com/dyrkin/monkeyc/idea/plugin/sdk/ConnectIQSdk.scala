@@ -5,6 +5,7 @@ import javax.swing.Icon
 
 import com.dyrkin.monkeyc.idea.plugin._
 import com.intellij.openapi.projectRoots._
+import com.intellij.openapi.vfs.VirtualFile
 import org.jdom.Element
 
 import scala.collection.JavaConversions._
@@ -17,7 +18,6 @@ object ConnectIQSdk {
 }
 
 class ConnectIQSdk extends SdkType("Connect IQ SDK") {
-
 
   override def suggestSdkName(currentSdkName: String, sdkPath: String): String = {
     s"Connect IQ ${extractSdkVersion(sdkPath)}"
@@ -55,4 +55,6 @@ class ConnectIQSdk extends SdkType("Connect IQ SDK") {
       }
     }.getOrElse("1.0.0")
   }
+
+  def getBinDir(sdk: Sdk) = sdk.getHomeDirectory.findChild("bin")
 }

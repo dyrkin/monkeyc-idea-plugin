@@ -16,7 +16,18 @@
         <scala.test.version>2.2.6</scala.test.version>
     </properties>
 
+    <modules>
+        <module>jps-module</module>
+    </modules>
+
     <dependencies>
+        <!-- JSP DEPENDENCY -->
+        <dependency>
+            <groupId>com.dyrkin.monkeyc.idea.plugin</groupId>
+            <artifactId>jps-module</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
         <!--SCALA DEPS -->
         <dependency>
             <groupId>org.scala-lang</groupId>
@@ -50,43 +61,29 @@
         </dependency>
     </dependencies>
 
-    <pluginRepositories>
-        <pluginRepository>
-            <id>dyrkin</id>
-            <name>Non Maven central plugins</name>
-            <url>http://dyrkin.github.io/repo</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <releases>
-                <updatePolicy>never</updatePolicy>
-            </releases>
-        </pluginRepository>
-    </pluginRepositories>
-
     <build>
         <sourceDirectory>src/main/scala</sourceDirectory>
         <testSourceDirectory>src/test/scala</testSourceDirectory>
 
         <plugins>
 
-            <plugin>
-                <groupId>com.dyrkin.env.dependency.plugin</groupId>
-                <artifactId>env-dependency-maven-plugin</artifactId>
-                <version>1.0-SNAPSHOT</version>
-                <executions>
-                    <execution>
-                        <id>add-deps</id>
-                        <phase>process-sources</phase>
-                        <goals>
-                            <goal>add-deps</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <environmentVariable>IDEA_LIBS</environmentVariable>
-                </configuration>
-            </plugin>
+            <!--<plugin>-->
+            <!--<groupId>com.dyrkin.env.dependency.plugin</groupId>-->
+            <!--<artifactId>env-dependency-maven-plugin</artifactId>-->
+            <!--<version>1.0-SNAPSHOT</version>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<id>add-deps</id>-->
+            <!--<phase>process-sources</phase>-->
+            <!--<goals>-->
+            <!--<goal>add-deps</goal>-->
+            <!--</goals>-->
+            <!--</execution>-->
+            <!--</executions>-->
+            <!--<configuration>-->
+            <!--<environmentVariable>IDEA_LIBS</environmentVariable>-->
+            <!--</configuration>-->
+            <!--</plugin>-->
 
             <plugin>
                 <groupId>net.alchim31.maven</groupId>

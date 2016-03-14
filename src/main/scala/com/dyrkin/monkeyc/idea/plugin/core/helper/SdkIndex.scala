@@ -1,5 +1,7 @@
 package com.dyrkin.monkeyc.idea.plugin.core.helper
 
+import com.intellij.openapi.externalSystem.service.execution.InvalidSdkException
+
 /**
   * @author eugene zadyra
   */

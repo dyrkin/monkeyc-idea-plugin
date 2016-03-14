@@ -2,8 +2,8 @@
     <id>com.dyrkin.monkeyc.idea.plugin</id>
     <name>Connect IQ Plugin</name>
     <version>0.0.1</version>
-    <vendor email="untrance@gmail.com">Eugene Zadyra</vendor>
     <vendor email="madisliias@gmail.com" url="https://liias.github.io/">Madis Liias</vendor>
+    <vendor email="untrance@gmail.com">Eugene Zadyra</vendor>
 
     <description></description>
 
@@ -11,10 +11,12 @@
     </change-notes>
 
 
-    <idea-version since-build="140.1532"/>
+    <idea-version since-build="131"/>
 
 
     <depends>com.intellij.modules.lang</depends>
+
+    <depends optional="true" config-file="java-deps.xml">com.intellij.modules.java</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <!--<sdkType implementation="ee.edio.garmin.sdk.MonkeySdkType"/>-->
@@ -45,6 +47,10 @@
                                 implementationClass="com.dyrkin.monkeyc.idea.plugin.MonkeyCompletionContributor"/>
         <lang.findUsagesProvider language="MonkeyC"
                                  implementationClass="com.dyrkin.monkeyc.idea.plugin.MonkeyFindUsageProvider"/>
+        <moduleType id="MONKEYC_MODULE" implementationClass="com.dyrkin.monkeyc.idea.plugin.module.MonkeyModuleType"/>
+
+        <projectStructureDetector
+                implementation="com.dyrkin.monkeyc.idea.plugin.module.MonkeyProjectStructureDetector"/>
         <!--<colorSettingsPage implementation="ee.edio.garmin.MonkeyColorSettingsPage"/>-->
 
         <!--<completion.contributor language="MonkeyC"-->
@@ -67,6 +73,8 @@
 
         <!--<dom.fileDescription implementation="ee.edio.garmin.dom.manifest.ManifestDomFileDescription"/>-->
         <!--<dom.fileDescription implementation="ee.edio.garmin.dom.sdk.projectinfo.ProjectInfoDomFileDescription"/>-->
+        <moduleExtension implementation="com.dyrkin.monkeyc.idea.plugin.settings.TargetDeviceModuleExtension"/>
+        <applicationService serviceImplementation="com.dyrkin.monkeyc.idea.plugin.settings.MonkeySettings"/>
     </extensions>
 
     <application-components>
