@@ -14,34 +14,41 @@ object ManifestDomain {
 
 
   @XmlAccessorType(XmlAccessType.FIELD)
-  case class Languages(@xmlElement var language: java.util.List[String])
-
-  @XmlAccessorType(XmlAccessType.FIELD)
-  case class Permission(@xmlAttribute var id: String) {
+  case class Languages(@xmlElement language: java.util.List[String]){
     def this() = this(null)
   }
 
   @XmlAccessorType(XmlAccessType.FIELD)
-  case class Permissions(@xmlElement var permission: java.util.List[Permission]) {
+  case class Permission(@xmlAttribute id: String) {
     def this() = this(null)
   }
 
   @XmlAccessorType(XmlAccessType.FIELD)
-  case class Product(@xmlAttribute var id: String)
+  case class Permissions(@xmlElement permission: java.util.List[Permission]) {
+    def this() = this(null)
+  }
 
   @XmlAccessorType(XmlAccessType.FIELD)
-  case class Products(@xmlElement var product: java.util.List[Product])
+  case class Product(@xmlAttribute id: String){
+    def this() = this(null)
+  }
 
   @XmlAccessorType(XmlAccessType.FIELD)
-  case class Application(@xmlAttribute var entry: String, @xmlAttribute var id: String,
-                         @xmlAttribute var launcherIcon: String, @xmlAttribute var name: String,
-                         @xmlAttribute var `type`: String, @xmlElement var products: Products,
-                         @xmlElement var permissions: Permissions, @xmlElement var languages: Languages)
+  case class Products(@xmlElement product: java.util.List[Product]){
+    def this() = this(null)
+  }
+
+  @XmlAccessorType(XmlAccessType.FIELD)
+  case class Application(@xmlAttribute entry: String, @xmlAttribute id: String,
+                         @xmlAttribute launcherIcon: String, @xmlAttribute name: String,
+                         @xmlAttribute `type`: String, @xmlElement products: Products,
+                         @xmlElement permissions: Permissions, @xmlElement languages: Languages) {
+    def this() = this(null, null, null, null, null, null, null, null)
+  }
 
   @XmlRootElement(name = "manifest")
   @XmlAccessorType(XmlAccessType.FIELD)
   case class MonkeyManifest(@xmlElement val application: Application) {
-
     def this() = this(null)
   }
 

@@ -40,7 +40,8 @@ class TargetDeviceModuleExtension(var source: Option[TargetDeviceModuleExtension
   }
 
   override def writeExternal(element: Element): Unit = {
-    element.setAttribute(TargetDevicesId, targetDevices)
+
+    element.setAttribute(TargetDevicesId, if(targetDevices == null) "" else targetDevices)
   }
 
   def setTargetDevices(td: String): Unit = {

@@ -1,28 +1,33 @@
 package com.dyrkin.monkeyc.idea.plugin.run;
 
+import com.intellij.openapi.module.Module;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.SettingsEditor;
-import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
+import java.util.List;
 
 /**
  * @author eugene zadyra
  */
 public class MonkeyRunConfigurationEditor extends SettingsEditor<MonkeyConfiguration> {
 
-    private Project project;
+    private List<String> possibleTargets;
     private JPanel panel;
     private JComboBox<String> targetDevice;
 
-    public MonkeyRunConfigurationEditor(Project project) {
-        this.project = project;
+    public MonkeyRunConfigurationEditor(List<String> possibleTargets) {
+        this.possibleTargets = possibleTargets;
     }
 
     @Override
     protected void resetEditorFrom(MonkeyConfiguration monkeyModuleBasedConfiguration) {
-        targetDevice.addItem(monkeyModuleBasedConfiguration.targetDevice());
+        targetDevice.removeAllItems();
+        for (String tg : possibleTargets) {
+            targetDevice.addItem(tg);
+        }
+        targetDevice.setSelectedItem(monkeyModuleBasedConfiguration.targetDevice());
     }
 
     @Override
@@ -38,6 +43,7 @@ public class MonkeyRunConfigurationEditor extends SettingsEditor<MonkeyConfigura
 
 
     private void createUIComponents() {
-        // TODO: place custom component creation code here
+
+
     }
 }

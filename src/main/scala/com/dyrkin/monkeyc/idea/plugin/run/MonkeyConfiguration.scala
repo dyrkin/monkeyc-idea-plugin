@@ -2,6 +2,7 @@ package com.dyrkin.monkeyc.idea.plugin.run
 
 import java.util
 
+import com.dyrkin.monkeyc.idea.plugin.settings.TargetDeviceModuleExtension
 import com.intellij.diagnostic.logging.LogConfigurationPanel
 import com.intellij.execution.configurations.{ConfigurationFactory, ModuleBasedConfiguration, RunConfiguration, RunProfileState}
 import com.intellij.execution.runners.ExecutionEnvironment
@@ -25,10 +26,15 @@ class MonkeyConfiguration(name: String, configurationModule: MonkeyRunConfigurat
   }
 
   override def getConfigurationEditor: SettingsEditor[_ <: RunConfiguration] = {
+    val module = getValidModules.head
     val group = new SettingsEditorGroup[MonkeyConfiguration]
-    group.addEditor(ExecutionBundle.message("run.configuration.configuration.tab.title"), new MonkeyRunConfigurationEditor(getProject))
+    group.addEditor(ExecutionBundle.message("run.configuration.configuration.tab.title"), new MonkeyRunConfigurationEditor(getTargetDevices(module)))
     group.addEditor(ExecutionBundle.message("logs.tab.title"), new LogConfigurationPanel[MonkeyConfiguration])
     group
+  }
+
+  def getTargetDevices(module: Module) = {
+    CachedManifest(module).application.products.product.map(_.id)
   }
 
 
@@ -54,5 +60,12 @@ class MonkeyConfiguration(name: String, configurationModule: MonkeyRunConfigurat
 
   def setTargetDevice(td: String): Unit = {
     targetDevice = td
+    getTargetDeviceModuleExtension.foreach(_.setTargetDevices(td))
+  }
+
+  //TODO Module based
+  private def getTargetDeviceModuleExtension = {
+    val module = Option(getConfigurationModule.getModule).orElse(ModuleManager.getInstance(getProject).getModules.headOption)
+    module.map(m => TargetDeviceModuleExtension(m))
   }
 }

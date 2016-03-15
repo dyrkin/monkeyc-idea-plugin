@@ -3,7 +3,7 @@ package com.dyrkin.monkeyc.idea.plugin.run
 import java.io.File
 
 import com.dyrkin.monkeyc.idea.plugin.run.simulator.Simulator
-import com.intellij.execution.configurations.{CommandLineState, RunConfiguration}
+import com.intellij.execution.configurations.CommandLineState
 import com.intellij.execution.process.{KillableColoredProcessHandler, ProcessHandler}
 import com.intellij.execution.runners.ExecutionEnvironment
 import com.intellij.openapi.module.{Module, ModuleManager}
@@ -23,7 +23,7 @@ class MonkeyRunningState(environment: ExecutionEnvironment, configurationModule:
     val simulator = new Simulator(sdkLocation, program, targetDevice)
     simulator.runSimulatorCommand.createProcess().waitFor()
     simulator.waitUntilStarted
-    new KillableColoredProcessHandler(simulator.pushAndRunCommand)
+    new KillableColoredProcessHandler(simulator.pushAndRunApplicationCommand)
   }
 
   //TODO Check how to work with multimodule projects

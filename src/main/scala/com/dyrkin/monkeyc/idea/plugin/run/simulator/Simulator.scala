@@ -16,11 +16,10 @@ class Simulator(val sdkLocation: String, val program: File, val deviceId: String
   val Attempts = 3
   val WaitDuration = 500L
 
-  def pushAndRunCommand = {
+  def pushAndRunApplicationCommand = {
     val command = createCommand
     command.setExePath(executable(os("monkeydo", ext = ".bat")))
     command.addParameter(program.getAbsolutePath)
-    command.addParameter("-d")
     command.addParameter(if (deviceId.isEmpty) "square_watch" else deviceId)
     command
   }
@@ -32,17 +31,15 @@ class Simulator(val sdkLocation: String, val program: File, val deviceId: String
   }
 
   def waitUntilStarted: Unit = {
-    pushProgram()
+    runHelp()
   }
 
-  private def preparePushProgramCommand(port: Int) = {
+  private def prepareHelpCommand(port: Int) = {
     val command = createCommand
     command.setExePath(executable(os("shell")))
     command.addParameter("--transport=tcp")
     command.addParameter(s"--transport_args=127.0.0.1:$port")
-    command.addParameter("push")
-    command.addParameter(program.getAbsolutePath)
-    command.addParameter(s"0:/GARMIN/APPS/${program.getName}")
+    command.addParameter("help")
     command
   }
 
@@ -52,12 +49,12 @@ class Simulator(val sdkLocation: String, val program: File, val deviceId: String
     command
   }
 
-  private def pushProgram(): Int = {
+  private def runHelp(): Int = {
     withAttempts {
       Ports.find { port =>
         Thread.sleep(WaitDuration)
         Try {
-          val process = preparePushProgramCommand(port).createProcess()
+          val process = prepareHelpCommand(port).createProcess()
           process.waitFor()
           process.exitValue() == 0
         } getOrElse false

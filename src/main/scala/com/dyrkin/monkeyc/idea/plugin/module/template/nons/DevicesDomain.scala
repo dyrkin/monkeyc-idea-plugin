@@ -10,7 +10,7 @@ import scala.annotation.meta.field
   * @author eugene zadyra
   */
 
-object ProjectInfoDomain {
+object DevicesDomain {
   type xmlAttribute = XmlAttribute@field
   type xmlElement = XmlElement@field
   type xmlValue = XmlValue@field

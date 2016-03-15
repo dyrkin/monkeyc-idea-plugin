@@ -4,7 +4,7 @@ import java.io.File
 
 
 import com.dyrkin.monkeyc.idea.plugin.module.template.nons.NonsMarshaller
-import com.dyrkin.monkeyc.idea.plugin.module.template.nons.ProjectInfoDomain.Monkeybrains
+import com.dyrkin.monkeyc.idea.plugin.module.template.nons.ProjectInfoDomain.ProjectInfo
 import com.dyrkin.monkeyc.idea.plugin.module.template.ns.{NsMarshaller, ManifestDomain}
 
 import scala.language.implicitConversions
@@ -21,6 +21,6 @@ object Applic extends App {
 //    Permissions(List(Permission("perm"))),
 //    Languages(List("eng")))), classOf[MonkeyManifest])
 
-  val projectInfo = NonsMarshaller.unmarshall(new File("/Volumes/Data/Users/unkind/Documents/j2ee/software/garmin/connectiq-sdk-mac-1.2.5/bin/projectInfo.xml"), classOf[Monkeybrains])
+  val projectInfo = NonsMarshaller.unmarshall(new File("/Volumes/Data/Users/unkind/Documents/j2ee/software/garmin/connectiq-sdk-mac-1.2.5/bin/projectInfo.xml"), classOf[ProjectInfo])
   println(projectInfo)
 }

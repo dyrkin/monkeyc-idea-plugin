@@ -7,7 +7,7 @@ import javax.swing.Icon
 
 import com.dyrkin.monkeyc.idea.plugin
 import com.dyrkin.monkeyc.idea.plugin.core.velocity.Engine
-import com.dyrkin.monkeyc.idea.plugin.module.template.nons.ProjectInfoDomain.Monkeybrains
+import com.dyrkin.monkeyc.idea.plugin.module.template.nons.ProjectInfoDomain.ProjectInfo
 import com.dyrkin.monkeyc.idea.plugin.module.template.ns.ManifestDomain._
 import com.dyrkin.monkeyc.idea.plugin.module.template.ns.NsMarshaller
 import com.dyrkin.monkeyc.idea.plugin.sdk.ConnectIQSdk
@@ -38,7 +38,7 @@ class MonkeyModuleBuilder extends ModuleBuilder with SourcePathsBuilder with Mod
   var sourcePaths: util.List[Pair[String, String]] = _
   var resourcePaths: util.List[Pair[String, String]] = _
 
-  var brains: Monkeybrains = _
+  var brains: ProjectInfo = _
 
 
   override def setupRootModel(rootModel: ModifiableRootModel): Unit = {
@@ -47,14 +47,12 @@ class MonkeyModuleBuilder extends ModuleBuilder with SourcePathsBuilder with Mod
     val contentEntry = doAddContentEntry(rootModel)
     setupSourceFolders(contentEntry)
     setupResourceFolders(contentEntry)
-    saveTargetDevice(rootModel)
+//    saveTargetDevice(rootModel)
     initDefaultApplication(rootModel)
     saveManifest(rootModel)
   }
 
   override def moduleCreated(module: Module): Unit = {
-    val settings = MonkeySettings(module.getProject)
-    settings.setProjectType("O project!!!!")
     CompilerWorkspaceConfiguration.getInstance(module.getProject).CLEAR_OUTPUT_DIRECTORY = false
   }
 
@@ -135,11 +133,11 @@ class MonkeyModuleBuilder extends ModuleBuilder with SourcePathsBuilder with Mod
       }
     }
   }
-
-  def saveTargetDevice(rootModel: ModifiableRootModel): Unit = {
-    val extension = rootModel.getModuleExtension(classOf[TargetDeviceModuleExtension])
-    extension.setTargetDevices(pageOne.targetPlatforms.mkString(" "))
-  }
+//
+//  def saveTargetDevice(rootModel: ModifiableRootModel): Unit = {
+//    val extension = rootModel.getModuleExtension(classOf[TargetDeviceModuleExtension])
+//    extension.setTargetDevices(pageOne.targetPlatforms.mkString(" "))
+//  }
 
   def saveManifest(rootModel: ModifiableRootModel) = {
     val moduleName = rootModel.getModule.getName
@@ -202,7 +200,7 @@ class MonkeyModuleBuilder extends ModuleBuilder with SourcePathsBuilder with Mod
   def onSdkSelected(sdk: Sdk): Unit = {
     val binDir = ConnectIQSdk().getBinDir(sdk)
     val projectInfoFile = binDir.findChild("projectInfo.xml").getPath
-    brains = new File(projectInfoFile).makeObj(classOf[Monkeybrains])
+    brains = new File(projectInfoFile).makeNonsObj(classOf[ProjectInfo])
   }
 
   def setPageOne(_pageOne: PageOneWrapper): Unit = {

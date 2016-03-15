@@ -36,8 +36,12 @@ package object plugin {
   }
 
   implicit class XmlFile(file: File) {
-    def makeObj[T](clazz: Class[T]): T = {
+    def makeNonsObj[T](clazz: Class[T]): T = {
       NonsMarshaller.unmarshall(file, clazz)
+    }
+
+    def makeNsObj[T](clazz: Class[T]): T = {
+      NsMarshaller.unmarshall(file, clazz)
     }
   }
 

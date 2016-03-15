@@ -58,7 +58,7 @@ class MonkeyBuilder extends TargetBuilder[MonkeySourceRootDescriptor, MonkeyTarg
     val prgFile = makePrgFile(module.getName, outputDirectory)
     val prgDebugFile = makePrgDebugFile(module.getName, outputDirectory)
     val commandLine = getCompileCommandLine(targetDevices, sdk, prgFile, sourceRoots, resourceRoots, manifest)
-//    compileContext.processMessage(new CompilerMessage(NAME, BuildMessage.Kind.INFO, commandLine.getCommandLineString))
+//    compileContext.processMessage(new CompilerMessage(NAME, BuildMessage.Kind.ERROR, targetDevices))
     Try(commandLine.createProcess()) match {
       case Success(process) =>
         val handler = new BaseOSProcessHandler(process, commandLine.getCommandLineString(), Charset.defaultCharset())
@@ -66,7 +66,6 @@ class MonkeyBuilder extends TargetBuilder[MonkeySourceRootDescriptor, MonkeyTarg
         handler.addProcessListener(adapter)
         handler.startNotify()
         handler.waitFor()
-//        compileContext.processMessage(new CompilerMessage(NAME, BuildMessage.Kind.INFO, s"out: ${prgFile.getAbsolutePath}"))
       case Failure(ex) => throw new ProjectBuildException("Failed to launch monkeyc compiler", ex)
     }
     consumeOutput(outputConsumer, prgFile, prgDebugFile)
@@ -85,6 +84,8 @@ class MonkeyBuilder extends TargetBuilder[MonkeySourceRootDescriptor, MonkeyTarg
     getSourceFiles(sourceRoots).foreach(sf => commandLine.addParameter(sf))
     commandLine.addParameter("-z")
     commandLine.addParameter(getResourceFiles(resourceRoots))
+    commandLine.addParameter("-d")
+    commandLine.addParameter(if(targetDevices.isEmpty) "square_watch" else targetDevices)
     commandLine
   }
 
