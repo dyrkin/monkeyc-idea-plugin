@@ -21,10 +21,12 @@ import scala.collection.JavaConversions._
 class MonkeyTarget(targetType: MonkeyTargetType, module: JpsModule) extends ModuleBasedTarget[MonkeySourceRootDescriptor](targetType, module) {
   override def isTests: Boolean = targetType.tests
 
-  override def computeDependencies(buildTargetRegistry: BuildTargetRegistry, targetOutputIndex: TargetOutputIndex): util.Collection[BuildTarget[_]] = {
+  override def computeDependencies(targetRegistry: BuildTargetRegistry, targetOutputIndex: TargetOutputIndex): util.Collection[BuildTarget[_]] = {
     val modules = JpsJavaExtensionService.dependencies(module).includedIn(JpsJavaClasspathKind.compile(isTests)).getModules
     val dependencies = modules.filter(_.getModuleType == JpsMonkeyModuleType).map(module => new MonkeyTarget(getMonkeyTargetType, module))
     if (isTests) dependencies + new MonkeyTarget(MonkeyTargetType.Production, module) else dependencies
+//    modules.flatMap(m => targetRegistry.getModuleBasedTargets(m, BuildTargetRegistry.ModuleTargetSelector.ALL))
+
   }
 
   override def getId: String = module.getName

@@ -1,7 +1,5 @@
 package com.dyrkin.monkeyc.idea.plugin.module
 
-import java.awt.event.{ItemEvent, ItemListener}
-
 /**
   * @author eugene zadyra
   */

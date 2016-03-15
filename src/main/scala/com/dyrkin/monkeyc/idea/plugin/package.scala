@@ -2,8 +2,8 @@ package com.dyrkin.monkeyc.idea
 
 import java.io.File
 import java.util.UUID
-
-import com.dyrkin.monkeyc.idea.plugin.module.template.Marshaller
+import com.dyrkin.monkeyc.idea.plugin.module.template.nons.NonsMarshaller
+import com.dyrkin.monkeyc.idea.plugin.module.template.ns.NsMarshaller
 import org.jsoup.Jsoup
 
 /**
@@ -37,7 +37,7 @@ package object plugin {
 
   implicit class XmlFile(file: File) {
     def makeObj[T](clazz: Class[T]): T = {
-      Marshaller.unmarshall(file, clazz)
+      NonsMarshaller.unmarshall(file, clazz)
     }
   }
 

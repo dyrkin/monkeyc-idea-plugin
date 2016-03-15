@@ -18,6 +18,5 @@ class PageThreeWizardStep(builder: MonkeyModuleBuilder) extends ModuleWizardStep
 
   override def updateStep(): Unit = {
     builder.fillProjectTemplatesPage(step.setTemplates)
-    builder.setProjectTemplateDescription(step.setDescription)
   }
 }

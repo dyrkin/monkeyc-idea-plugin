@@ -16,9 +16,11 @@
 
     <depends>com.intellij.modules.lang</depends>
 
-    <depends optional="true" config-file="java-deps.xml">com.intellij.modules.java</depends>
+    <!--<depends optional="false" config-file="java-deps.xml">com.intellij.modules.java</depends>-->
 
     <extensions defaultExtensionNs="com.intellij">
+
+        <compileServer.plugin classpath=".;./classes/;scala-library-2.11.7.jar"/>
         <!--<sdkType implementation="ee.edio.garmin.sdk.MonkeySdkType"/>-->
 
         <!-- Add your extensions here -->
@@ -75,6 +77,12 @@
         <!--<dom.fileDescription implementation="ee.edio.garmin.dom.sdk.projectinfo.ProjectInfoDomFileDescription"/>-->
         <moduleExtension implementation="com.dyrkin.monkeyc.idea.plugin.settings.TargetDeviceModuleExtension"/>
         <applicationService serviceImplementation="com.dyrkin.monkeyc.idea.plugin.settings.MonkeySettings"/>
+
+        <!-- run application -->
+        <programRunner id="MonkeyCRunner" implementation="com.dyrkin.monkeyc.idea.plugin.run.MonkeyProgramRunner"/>
+        <runConfigurationProducer
+                implementation="com.dyrkin.monkeyc.idea.plugin.run.MonkeyRunConfigurationProducer"/>
+        <configurationType implementation="com.dyrkin.monkeyc.idea.plugin.run.MonkeyConfigurationType"/>
     </extensions>
 
     <application-components>

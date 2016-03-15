@@ -1,4 +1,4 @@
-package com.dyrkin.monkeyc.idea.plugin.module.template
+package com.dyrkin.monkeyc.idea.plugin.module.template.nons
 
 import java.io.{File, StringWriter}
 import javax.xml.bind.JAXBContext
@@ -8,7 +8,7 @@ import com.sun.xml.internal.bind.marshaller.NamespacePrefixMapper
 /**
   * @author eugene zadyra
   */
-object Marshaller {
+object NonsMarshaller {
 
   val prefixMapper = new NamespacePrefixMapper {
     override def getPreferredPrefix(namespaceUri: String, suggestion: String, requirePrefix: Boolean): String = "iq"

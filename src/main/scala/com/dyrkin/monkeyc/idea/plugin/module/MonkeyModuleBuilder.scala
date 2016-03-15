@@ -7,9 +7,9 @@ import javax.swing.Icon
 
 import com.dyrkin.monkeyc.idea.plugin
 import com.dyrkin.monkeyc.idea.plugin.core.velocity.Engine
-import com.dyrkin.monkeyc.idea.plugin.module.template.Marshaller
 import com.dyrkin.monkeyc.idea.plugin.module.template.nons.ProjectInfoDomain.Monkeybrains
 import com.dyrkin.monkeyc.idea.plugin.module.template.ns.ManifestDomain._
+import com.dyrkin.monkeyc.idea.plugin.module.template.ns.NsMarshaller
 import com.dyrkin.monkeyc.idea.plugin.sdk.ConnectIQSdk
 import com.dyrkin.monkeyc.idea.plugin.settings.{MonkeySettings, TargetDeviceModuleExtension}
 import com.dyrkin.monkeyc.idea.plugin.{MonkeyIcons, XmlFile}
@@ -156,7 +156,7 @@ class MonkeyModuleBuilder extends ModuleBuilder with SourcePathsBuilder with Mod
         languages = Languages(pageTwo.selectedLanguages)
       )
     )
-    val manifestContent = Marshaller.marshall(manifest, classOf[MonkeyManifest])
+    val manifestContent = NsMarshaller.marshall(manifest, classOf[MonkeyManifest])
     val manifestFile = rootModel.getContentRoots.head.findFileByRelativePath("manifest.xml")
     VfsUtil.saveText(manifestFile, manifestContent)
   }
@@ -166,8 +166,8 @@ class MonkeyModuleBuilder extends ModuleBuilder with SourcePathsBuilder with Mod
   }
 
   def shouldRename(fileName: String): Boolean = {
-    val nameWithouExtension = fileName.split("\\.").headOption
-    nameWithouExtension.exists(name => brains.newProjectFilePlaceholders.placeHolder.exists(_.suffix == name))
+    val nameWithoutExtension = fileName.split("\\.").headOption
+    nameWithoutExtension.exists(name => brains.newProjectFilePlaceholders.placeHolder.exists(_.suffix == name))
   }
 
   def initDefaultApplication(rootModel: ModifiableRootModel): Unit = {

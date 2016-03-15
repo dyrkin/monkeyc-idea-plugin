@@ -4,6 +4,7 @@ import java.io.File
 import javax.swing.Icon
 
 import com.dyrkin.monkeyc.idea.plugin._
+import com.dyrkin.monkeyc.idea.plugin.jps.MonkeyConstants
 import com.intellij.openapi.projectRoots._
 import com.intellij.openapi.vfs.VirtualFile
 import org.jdom.Element
@@ -17,7 +18,7 @@ object ConnectIQSdk {
   def apply() = SdkType.findInstance(classOf[ConnectIQSdk])
 }
 
-class ConnectIQSdk extends SdkType("Connect IQ SDK") {
+class ConnectIQSdk extends SdkType(MonkeyConstants.SdkTypeId) {
 
   override def suggestSdkName(currentSdkName: String, sdkPath: String): String = {
     s"Connect IQ ${extractSdkVersion(sdkPath)}"

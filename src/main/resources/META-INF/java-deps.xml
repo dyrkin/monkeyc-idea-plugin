@@ -1,7 +1,7 @@
 <idea-plugin version="2">
     <extensions defaultExtensionNs="com.intellij">
 
-        <compileServer.plugin classpath="jps-plugin.jar"/>
+
 
         <!--<moduleConfigurationEditorProvider implementation="ee.edio.garmin.configuration.MonkeyModuleEditorsProvider"-->
                                            <!--order="first"/>-->

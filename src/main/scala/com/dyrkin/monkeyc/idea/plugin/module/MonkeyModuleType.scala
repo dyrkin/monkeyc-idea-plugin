@@ -3,6 +3,7 @@ package com.dyrkin.monkeyc.idea.plugin.module
 import javax.swing.Icon
 
 import com.dyrkin.monkeyc.idea.plugin.MonkeyIcons
+import com.dyrkin.monkeyc.idea.plugin.jps.MonkeyConstants
 import com.intellij.ide.util.projectWizard._
 import com.intellij.openapi.module.ModuleType
 import com.intellij.openapi.projectRoots.SdkTypeId
@@ -18,7 +19,7 @@ object MonkeyModuleType {
   def apply() = Instance
 }
 
-class MonkeyModuleType extends ModuleType[MonkeyModuleBuilder]("MONKEYC_MODULE") {
+class MonkeyModuleType extends ModuleType[MonkeyModuleBuilder](MonkeyConstants.ModuleId) {
   override def getName: String = "Monkey C Module"
 
   override def getDescription: String = "Monkey C Module"

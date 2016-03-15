@@ -8,7 +8,7 @@
                         prefix = "iq",
                         namespaceURI = "http://www.garmin.com/xml/connectiq")
         })
-package com.dyrkin.monkeyc.idea.plugin.module.template;
+package com.dyrkin.monkeyc.idea.plugin.module.template.ns;
 
 import javax.xml.bind.annotation.XmlNs;
 import javax.xml.bind.annotation.XmlNsForm;
