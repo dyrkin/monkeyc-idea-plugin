@@ -1,0 +1,12 @@
+<idea-plugin version="2">
+    <extensions defaultExtensionNs="com.intellij">
+
+
+
+        <!--<moduleConfigurationEditorProvider implementation="ee.edio.garmin.configuration.MonkeyModuleEditorsProvider"-->
+                                           <!--order="first"/>-->
+
+
+
+    </extensions>
+</idea-plugin>

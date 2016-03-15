@@ -1,0 +1,382 @@
+{
+  parserClass="com.dyrkin.monkeyc.idea.plugin.parser.MonkeyParser"
+  parserUtilClass="com.dyrkin.monkeyc.idea.plugin.parser.MonkeyParserUtil"
+
+  implements="com.dyrkin.monkeyc.idea.plugin.psi.MonkeyPsiCompositeElement"
+  extends="com.dyrkin.monkeyc.idea.plugin.psi.impl.MonkeyPsiCompositeElementImpl"
+
+  elementTypeHolderClass="com.dyrkin.monkeyc.idea.plugin.psi.MonkeyTypes"
+  elementTypePrefix=""
+  elementTypeClass="com.dyrkin.monkeyc.idea.plugin.psi.MonkeyElementType"
+  tokenTypeClass="com.dyrkin.monkeyc.idea.plugin.psi.MonkeyTokenType"
+
+  psiClassPrefix="Monkey"
+  psiImplClassSuffix="Impl"
+  psiPackage="com.dyrkin.monkeyc.idea.plugin.psi"
+  psiImplPackage="com.dyrkin.monkeyc.idea.plugin.psi.impl"
+  psiImplUtilClass="com.dyrkin.monkeyc.idea.plugin.psi.impl.MonkeyPsiImplUtil"
+
+// * 0 or more
+// ? optional
+
+tokens = [
+    DOT = "."
+    SEMI = ";"
+    QUES = "?"
+    COLON = ":"
+    CLASS = "class"
+    FUNCTION = "function"
+    RETURN = "return"
+    NEW = "new"
+    VAR = "var"
+    CONST = "const"
+    MODULE = "module"
+    USING = "using"
+    AS = "as"
+    ENUM = "enum"
+    EXTENDS = "extends"
+    NULL = "null"
+    NATIVE = "native"
+    HIDDEN = "hidden"
+    STATIC = "static"
+    INSTANCEOF = "instanceof"
+    HAS = "has"
+    IF = "if"
+    ELSE = "else"
+    DO = "do"
+    WHILE = "while"
+    FOR = "for"
+    BREAK = "break"
+    CONTINUE = "continue"
+    SWITCH = "switch"
+    DEFAULT = "default"
+    CASE = "case"
+    TRY = "try"
+    CATCH = "catch"
+    FINALLY = "finally"
+    THROW = "throw"
+    AND = "and"
+    OR = "or"
+    TRUE = "true"
+    FALSE = "false"
+    //SINGLE_LINE_COMMENT = "//"
+    MULTI_LINE_COMMENT_START = "/*"
+    MULTI_LINE_COMMENT_END = "*/"
+    STRING_A = "\""
+    STRING_B = "\'"
+
+    LBRACE = "{"
+    RBRACE = "}"
+
+    LBRACKET = "["
+    RBRACKET = "]"
+
+    LPAREN = "("
+    RPAREN = ")"
+    COMMA = ","
+    STAR = "*"
+    BAR = "|"
+    LT = "<"
+    GT = ">"
+
+    EQGT = "=>"
+
+    AMP = "&"
+
+    BARBAR = "||"
+    AMPAMP = "&&"
+    PLUSPLUS = "++"
+    SUBSUB = "--"
+    EQ = "="
+
+    EQEQ = "=="
+    BANGEQ = "!="
+    PLUSEQ = "+="
+    SUBEQ = "-="
+    STAREQ = "*="
+    SLASHEQ = "/="
+    AMPEQ = "&="
+    CARETEQ = "|="
+    PERCENTEQ = "%="
+
+    CARET = "^"
+    PERCENT = "%"
+    TILDE = "~"
+    BANG = "!"
+
+    PLUS = "+"
+    SUB = "-"
+    STAR = "*"
+    SLASH = "/"
+
+    // WHITE_SPACE is overwritten by JFlex, this here is only for Live Preview
+    WHITE_SPACE='regexp:\s+'
+    SINGLE_LINE_COMMENT='regexp://.*'
+    BLOCK_COMMENT='regexp:/\*([^*]|\*+[^*/])*(\*+/)?'
+
+    IDENTIFIER = 'regexp:[a-zA-Z$_][a-zA-Z0-9$_]*'
+
+    LONGLITERAL = 'regexp:\d+[lL]'
+    INTLITERAL = 'regexp:\d+'
+
+    HEX_LITERAL = 'regexp:0[Xx][0-9a-fA-F]*'
+
+    // 0 can be omitted before dot
+    FLOATLITERAL = 'regexp:(\d+)?(\.\d+)?[fF]?'
+    DOUBLELITERAL = 'regexp:(\d+)?(\.\d+)?[dD]'
+
+    string = "regexp:(\"([^\"\\]|\\.)*\")"
+    CHARLITERAL = "regexp:('([^'\\]|\\.)*')"
+  ]
+
+  //extends(".*Expression")="expression"
+}
+
+monkeyCFile ::= compilationUnit*
+
+private compilationUnit ::= usingDeclaration | moduleDeclaration | constDeclaration | fieldDeclaration
+                          | functionDeclaration | classDeclaration | blockStatement | SEMI
+
+usingDeclaration ::= USING usingReference (AS asReference)? SEMI {pin=1}
+
+usingReference ::= qualifiedName
+
+asReference ::= componentName{mixin="com.dyrkin.monkeyc.idea.plugin.psi.reference.MonkeyAsReferenceElementBase"}
+
+moduleDeclaration ::= modifiers MODULE componentName moduleBody
+
+moduleBody ::= classBody
+
+classDeclaration ::= modifiers CLASS className (EXTENDS type)? classBody
+                   | modifiers ENUM componentName? enumBody
+                   {mixin="com.dyrkin.monkeyc.idea.plugin.psi.base.MonkeyClassDeclarationBase"}
+
+className ::= componentName
+
+modifiers ::= annotation? STATIC? HIDDEN?
+
+annotation ::= LPAREN symbol RPAREN
+
+enumBody ::= LBRACE enumConstants? COMMA? enumBodyDeclarations? RBRACE
+
+enumConstants ::= enumConstant (COMMA enumConstant)*
+
+enumConstant ::= componentName (EQ INTLITERAL)?
+
+enumBodyDeclarations ::= SEMI classBodyDeclaration*
+
+classBody ::= LBRACE classBodyDeclaration* RBRACE
+
+classBodyDeclaration ::= usingDeclaration | block | constDeclaration | fieldDeclaration | functionDeclaration | classDeclaration | SEMI
+
+componentName ::= id
+{mixin="com.dyrkin.monkeyc.idea.plugin.psi.reference.MonkeyUsingReferenceElementBase"}
+
+id ::= IDENTIFIER
+
+functionDeclaration ::= modifiers FUNCTION componentName formalParameters (THROWS qualifiedNameList)?
+                        LBRACE (explicitConstructorInvocation)? (blockStatement)* RBRACE {
+  pin=3
+  mixin="com.dyrkin.monkeyc.idea.plugin.psi.base.MonkeyFunctionDeclarationBase"
+}
+
+constDeclaration ::= modifiers CONST variableDeclarator SEMI
+
+fieldDeclaration ::= modifiers VAR variableDeclarator
+                    (COMMA variableDeclarator)* SEMI
+
+variableDeclarator ::= variableDeclarationName (LBRACKET RBRACKET)* (EQ variableInitializer)?
+variableDeclarationName ::= componentName {mixin="com.dyrkin.monkeyc.idea.plugin.psi.base.MonkeyVariableDeclarationNameBase"}
+type ::= qualifiedName (LBRACKET RBRACKET)*
+
+qualifiedNameList ::= qualifiedName (COMMA qualifiedName)*
+
+formalParameters ::= LPAREN (formalParameterDecls)? RPAREN
+
+formalParameterDecls ::= normalParameterDecl (COMMA normalParameterDecl)*
+
+normalParameterDecl ::= componentName (LBRACKET RBRACKET)* {mixin="com.dyrkin.monkeyc.idea.plugin.psi.base.MonkeyVariableDeclarationNameBase"}
+
+//NOTE: the position of Identifier 'super' is set to the type args position here
+explicitConstructorInvocation ::= SUPER arguments SEMI
+                                | primary DOT SUPER arguments SEMI
+
+qualifiedName ::= componentName (DOT componentName)*
+
+block ::= LBRACE blockStatement* RBRACE
+
+blockStatement ::= localVariableDeclarationStatement
+                 | classDeclaration
+                 | statement
+
+localVariableDeclarationStatement ::= localVariableDeclaration SEMI
+
+localVariableDeclaration ::= VAR variableDeclarator (COMMA variableDeclarator)*
+
+statement ::= block
+            | IF parExpression statement (ELSE statement)?
+            | forStatement
+            | WHILE parExpression statement
+            | DO statement WHILE parExpression SEMI
+            | tryStatement
+            | SWITCH parExpression LBRACE switchBlockStatementGroups RBRACE
+            | RETURN expression? SEMI
+            | THROW expression SEMI
+            | BREAK referenceExpression? SEMI
+            | CONTINUE referenceExpression? SEMI
+            | expression SEMI
+            | IDENTIFIER COLON statement
+            | SEMI
+
+switchBlockStatementGroups ::= (switchBlockStatementGroup)*
+
+switchBlockStatementGroup ::= switchLabel (blockStatement)*
+
+switchLabel ::= CASE expression COLON | DEFAULT COLON
+
+tryStatement ::= TRY block (catches FINALLY block | catches | FINALLY block)
+
+catches ::= catchClause (catchClause)*
+
+catchClause ::= CATCH LPAREN catchParameter RPAREN block
+
+catchParameter ::= IDENTIFIER (LBRACKET RBRACKET)*
+
+forStatement ::= FOR LPAREN forInit? SEMI expression? SEMI expressionList? RPAREN statement
+
+forInit ::= localVariableDeclaration| expressionList
+
+parExpression ::= LPAREN expression RPAREN
+
+expressionList ::= expression (COMMA expression)*
+
+expression ::= conditionalExpression (assignmentOperator expression)?
+
+assignmentOperator ::= EQ
+                     | PLUSEQ
+                     | SUBEQ
+                     | STAREQ
+                     | SLASHEQ
+                     | AMPEQ
+                     | BAREQ
+                     | CARETEQ
+                     | PERCENTEQ
+                     | LT LT EQ
+                     | GT GT GT EQ
+                     | GT GT EQ
+
+bitwiseOperator ::= AMP | CARET| BAR
+
+conditionalExpression ::= conditionalOrExpression (QUES expression COLON conditionalExpression)?
+
+conditionalOrExpression ::= conditionalAndExpression ((BARBAR | OR) conditionalAndExpression)*
+
+conditionalAndExpression ::= inclusiveOrExpression ((AMPAMP | AND) inclusiveOrExpression)*
+
+inclusiveOrExpression ::= exclusiveOrExpression (BAR exclusiveOrExpression)*
+
+exclusiveOrExpression ::= andExpression (CARET andExpression)*
+
+andExpression ::= equalityExpression (AMP equalityExpression)*
+
+equalityExpression ::= hasExpression ((EQEQ | BANGEQ) hasExpression)*
+
+hasExpression ::= instanceOfExpression (HAS symbol)?
+
+instanceOfExpression ::= relationalExpression (INSTANCEOF type)?
+
+relationalExpression ::= shiftExpression (relationalOp shiftExpression)*
+
+relationalOp ::= LT EQ | GT EQ | LT | GT
+
+shiftExpression ::= additiveExpression (shiftOp additiveExpression)*
+
+shiftOp ::= LT LT | GT GT GT | GT GT
+
+additiveExpression ::= multiplicativeExpression ((PLUS | SUB) multiplicativeExpression)*
+
+multiplicativeExpression ::= bitwiseExpression ((STAR | SLASH | PERCENT) unaryExpression)*
+
+bitwiseExpression ::= unaryExpression (bitwiseOperator unaryExpression)*
+
+/**
+ * NOTE: for '+' and '-', if the next token is int or long integral, then it's not a unary expression.
+ *       it's a literal with signed value. INTLITERAL AND LONG LITERAL are added here for this.
+ */
+unaryExpression ::= PLUS unaryExpression
+                  | SUB unaryExpression
+                  | PLUSPLUS unaryExpression
+                  | SUBSUB unaryExpression
+                  | unaryExpressionNotPlusMinus
+
+unaryExpressionNotPlusMinus ::= TILDE unaryExpression
+                              | BANG unaryExpression
+                              | primary selector* (PLUSPLUS | SUBSUB)?
+
+/**
+ * have to use scope here, parameter passing isn't well supported in antlr.
+ */
+primary ::= parExpression
+          | referenceExpression qualifiedReferenceExpression* identifierSuffix?
+          | literal
+          | symbol
+          | creator
+          | VOID DOT CLASS {
+
+}
+
+referenceExpression ::= componentName {
+  mixin="com.dyrkin.monkeyc.idea.plugin.psi.reference.MonkeyReferenceExpressionBase"
+}
+
+qualifiedReferenceExpression ::= DOT referenceExpression {elementType="referenceExpression"}
+
+identifierSuffix ::= (LBRACKET RBRACKET) + DOT CLASS
+                   | (LBRACKET expression RBRACKET)+
+                   | arguments
+                   | DOT CLASS
+                   | DOT IDENTIFIER arguments
+                   | DOT SUPER arguments
+
+selector ::= DOT IDENTIFIER (arguments)?
+           | LBRACKET expression RBRACKET
+
+creator ::= objectCreator | arrayCreator
+objectCreator ::= NEW qualifiedName classCreatorRest {pin=2}
+
+arrayCreator ::= NEW LBRACKET expression RBRACKET // new [expression evaluating to integer]
+               | LBRACKET (expression (COMMA expression)* )? RBRACKET // [expression1, expression2, ...]
+               | dictionaryCreator
+
+dictionaryCreator ::= NEW LBRACE RBRACE // new {}
+                    | LBRACE (keyValueInitializer (COMMA keyValueInitializer)* )? RBRACE // {"a"=> exp, :b => exp2, ...}
+
+keyValueInitializer ::= primary EQGT expression
+
+arrayInitializer ::= LBRACE (variableInitializer (COMMA variableInitializer)*)? (COMMA)? RBRACE
+
+variableInitializer ::= arrayInitializer | expression
+
+classCreatorRest ::= arguments classBody?
+
+arguments ::= LPAREN (expressionList)? RPAREN
+
+symbol ::= COLON IDENTIFIER {pin=1}
+
+// maybe use built-in string instead of STRINGLITERAL?
+stringLiteral ::= string {
+  implements = "com.intellij.psi.PsiLanguageInjectionHost"
+  methods = [isValidHost updateText createLiteralTextEscaper]
+}
+
+
+literal ::= INTLITERAL
+          | LONGLITERAL
+          | FLOATLITERAL
+          | DOUBLELITERAL
+          | HEX_LITERAL
+          | CHARLITERAL
+          | stringLiteral
+          | TRUE
+          | FALSE
+          | NULL
