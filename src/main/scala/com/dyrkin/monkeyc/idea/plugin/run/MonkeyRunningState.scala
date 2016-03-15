@@ -3,43 +3,36 @@ package com.dyrkin.monkeyc.idea.plugin.run
 import java.io.File
 
 import com.dyrkin.monkeyc.idea.plugin.run.simulator.Simulator
-import com.intellij.execution.{ExecutionResult, Executor}
-import com.intellij.execution.configurations.{RunnerSettings, RunConfiguration, CommandLineState}
+import com.intellij.execution.configurations.{CommandLineState, RunConfiguration}
 import com.intellij.execution.process.{KillableColoredProcessHandler, ProcessHandler}
-import com.intellij.execution.runners.{ProgramRunner, ExecutionEnvironment}
+import com.intellij.execution.runners.ExecutionEnvironment
+import com.intellij.openapi.module.{Module, ModuleManager}
 import com.intellij.openapi.projectRoots.Sdk
+import com.intellij.openapi.roots.{CompilerModuleExtension, ModuleRootManager}
 
 /**
   * @author eugene zadyra
   */
-class MonkeyRunningState(environment: ExecutionEnvironment, sdk: Sdk, targetDevice: String) extends CommandLineState(environment) {
-
-  var simulator: Simulator = _
-
-
-//  override def execute(executor: Executor, runner: ProgramRunner[_ <: RunnerSettings]): ExecutionResult = {
-//    val sdkLocation = sdk.getHomePath
-//    val program = s"${getEnvironment.getProject.getName}.prg"
-//    simulator = new Simulator(sdkLocation, new File(program), targetDevice)
-//    new KillableColoredProcessHandler(simulator.runSimulator(), simulator.prepareSimulatorCommand)
-//  }
+class MonkeyRunningState(environment: ExecutionEnvironment, configurationModule: MonkeyRunConfigurationModule, sdk: Sdk, targetDevice: String) extends CommandLineState(environment) {
 
   override def startProcess(): ProcessHandler = {
+    val module = getModule
     val sdkLocation = sdk.getHomePath
-    val program = s"${getEnvironment.getProject.getName}.prg"
-    simulator = new Simulator(sdkLocation, new File(program), targetDevice)
-    new KillableColoredProcessHandler(simulator.runSimulator(), simulator.prepareSimulatorCommand)
-    new KillableColoredProcessHandler(simulator.pushAndRunApplication(), simulator.prepareSimulatorCommand)
+    val outputPath = compilerModuleExtension(module).getCompilerOutputPath
+    val program = new File(outputPath.getPath, s"${module.getName}.prg")
+    val simulator = new Simulator(sdkLocation, program, targetDevice)
+    simulator.runSimulatorCommand.createProcess().waitFor()
+    simulator.waitUntilStarted
+    new KillableColoredProcessHandler(simulator.pushAndRunCommand)
   }
 
-  private def getConfiguration: MonkeyConfiguration = {
-    if (getEnvironment.getRunnerAndConfigurationSettings == null) {
-      throw new RuntimeException("runnerAndConfigurationSettings is null")
-    }
-    val configuration: RunConfiguration = getEnvironment.getRunnerAndConfigurationSettings.getConfiguration
-    if (configuration == null || !configuration.isInstanceOf[MonkeyConfiguration]) {
-      throw new RuntimeException("runnerAndConfigurationSettings.getConfiguration() is null or wrong type")
-    }
-    configuration.asInstanceOf[MonkeyConfiguration]
+  //TODO Check how to work with multimodule projects
+  def getModule = {
+    Option(configurationModule.getModule).getOrElse(ModuleManager.getInstance(configurationModule.getProject).getModules.head)
+  }
+
+  def compilerModuleExtension(module: Module) = {
+    val moduleRootManager = ModuleRootManager.getInstance(module)
+    moduleRootManager.getModuleExtension(classOf[CompilerModuleExtension])
   }
 }

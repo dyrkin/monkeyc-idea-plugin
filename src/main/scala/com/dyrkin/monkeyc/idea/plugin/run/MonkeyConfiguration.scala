@@ -33,7 +33,7 @@ class MonkeyConfiguration(name: String, configurationModule: MonkeyRunConfigurat
 
 
   override def getState(executor: Executor, executionEnvironment: ExecutionEnvironment): RunProfileState = {
-    new MonkeyRunningState(executionEnvironment, getProjectSdk, targetDevice)
+    new MonkeyRunningState(executionEnvironment, getConfigurationModule, getProjectSdk, targetDevice)
   }
 
   def getProjectSdk = {
