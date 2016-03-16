@@ -1,4 +1,4 @@
-<idea-plugin url="https://github.com/liias/MonkeyC" version="2">
+<idea-plugin url="https://github.com/dyrkin/monkeyc-idea-plugin" version="2">
     <id>com.dyrkin.monkeyc.idea.plugin</id>
     <name>Connect IQ Plugin</name>
     <version>0.0.1</version>
