@@ -66,6 +66,6 @@ class MonkeyConfiguration(name: String, configurationModule: MonkeyRunConfigurat
   //TODO Module based
   private def getMonkeyFacet = {
     val module = Option(getConfigurationModule.getModule).orElse(ModuleManager.getInstance(getProject).getModules.headOption)
-    module.map(m => MonkeyFacet(m))
+    module.flatMap(m => MonkeyFacet(m))
   }
 }

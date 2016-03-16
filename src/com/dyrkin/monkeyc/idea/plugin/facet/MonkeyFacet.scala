@@ -8,7 +8,7 @@ import com.intellij.openapi.module.Module
   * @author eugene zadyra
   */
 object MonkeyFacet {
-  def apply(module: Module) = FacetManager.getInstance(module).getFacetByType(MonkeyFacetType.TypeId)
+  def apply(module: Module) = Option(FacetManager.getInstance(module).getFacetByType(MonkeyFacetType.TypeId))
 
   //should only be called from write action
   def createFacet(module: Module) {

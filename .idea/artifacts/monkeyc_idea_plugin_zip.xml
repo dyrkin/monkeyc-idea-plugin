@@ -6,7 +6,8 @@
         <element id="directory" name="lib">
           <element id="artifact" artifact-name="jps-plugin.jar" />
           <element id="artifact" artifact-name="monkeyc-idea-plugin.jar" />
-          <element id="artifact" artifact-name="scala-sdk.libs" />
+          <element id="library" level="project" name="jsoup" />
+          <element id="library" level="project" name="scala-sdk" />
         </element>
       </element>
     </root>

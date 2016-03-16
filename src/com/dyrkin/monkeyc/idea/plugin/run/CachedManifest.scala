@@ -5,6 +5,7 @@ import com.dyrkin.monkeyc.idea.plugin.module.template.ns.ManifestDomain.MonkeyMa
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.vfs.VfsUtilCore
 import scala.collection.mutable
+import scala.util.Try
 
 /**
   * @author eugene zadyra
@@ -16,18 +17,18 @@ object CachedManifest {
 
   def apply(module: Module) = {
     //TODO Review module.getModuleFile.getParent
-    val manifest = module.getModuleFile.getParent.findFileByRelativePath("manifest.xml")
-    val stamp = manifest.getModificationStamp
-    holder synchronized {
-      if (!holder.contains(module)) {
-        holder += module -> mutable.Map()
+    Try(module.getModuleFile.getParent.findFileByRelativePath("manifest.xml")).map { manifest =>
+      val stamp = manifest.getModificationStamp
+      holder synchronized {
+        if (!holder.contains(module)) {
+          holder += module -> mutable.Map()
+        }
+        if (!holder(module).contains(stamp)) {
+          holder(module).clear()
+          holder(module) += stamp -> VfsUtilCore.virtualToIoFile(manifest).makeNsObj(classOf[MonkeyManifest])
+        }
       }
-      if (!holder(module).contains(stamp)) {
-        holder(module).clear()
-        holder(module) += stamp -> VfsUtilCore.virtualToIoFile(manifest).makeNsObj(classOf[MonkeyManifest])
-      }
-
-    }
-    holder(module)(stamp)
+      holder(module)(stamp)
+    }.getOrElse(sys.error("manifest.xml not found in the module root"))
   }
 }
