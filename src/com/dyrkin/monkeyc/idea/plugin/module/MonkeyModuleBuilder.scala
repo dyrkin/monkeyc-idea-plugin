@@ -11,7 +11,6 @@ import com.dyrkin.monkeyc.idea.plugin.module.template.nons.ProjectInfoDomain.Pro
 import com.dyrkin.monkeyc.idea.plugin.module.template.ns.ManifestDomain._
 import com.dyrkin.monkeyc.idea.plugin.module.template.ns.NsMarshaller
 import com.dyrkin.monkeyc.idea.plugin.sdk.ConnectIQSdk
-import com.dyrkin.monkeyc.idea.plugin.settings.{MonkeySettings, TargetDeviceModuleExtension}
 import com.dyrkin.monkeyc.idea.plugin.{MonkeyIcons, XmlFile}
 import com.intellij.compiler.CompilerWorkspaceConfiguration
 import com.intellij.ide.util.projectWizard.ModuleBuilder.ModuleConfigurationUpdater

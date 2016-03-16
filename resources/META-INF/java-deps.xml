@@ -1,5 +1,10 @@
 <idea-plugin version="2">
     <extensions defaultExtensionNs="com.intellij">
+        <moduleType id="MONKEYC_MODULE" implementationClass="com.dyrkin.monkeyc.idea.plugin.module.MonkeyModuleType"/>
+        <projectStructureDetector implementation="com.dyrkin.monkeyc.idea.plugin.module.MonkeyProjectStructureDetector"/>
 
+        <facetType implementation="com.dyrkin.monkeyc.idea.plugin.facet.MonkeyFacetType"/>
+        <framework.detector implementation="com.dyrkin.monkeyc.idea.plugin.facet.MonkeyFacetBasedFrameworkDetector"/>
+        <compileServer.plugin classpath=".;./classes/;scala-library-2.11.8.jar;jps-plugin.jar"/>
     </extensions>
 </idea-plugin>

@@ -16,6 +16,9 @@
       <option name="BuildArtifacts" enabled="true">
         <artifact name="jps-plugin.jar" />
       </option>
+      <option name="BuildArtifacts" enabled="true">
+        <artifact name="monkeyc-idea-plugin.jar" />
+      </option>
     </method>
   </configuration>
 </component>

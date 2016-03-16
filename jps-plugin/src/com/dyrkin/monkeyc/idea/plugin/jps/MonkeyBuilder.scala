@@ -39,14 +39,15 @@ class MonkeyBuilder extends TargetBuilder[MonkeySourceRootDescriptor, MonkeyTarg
     val jpsModule = target.getModule
     val module = jpsModule.asTyped(JpsMonkeyModuleType())
     val sdk = getSdk(compileContext, module)
-    val targetDevices = getTargetDevices(target)
+    val facet = module.getContainer.getChild(JpsMonkeyModuleExtension.Kind)
+    val targetDevice = facet.properties.targetDeviceId
     val outputDirectory = getOutputDirectory(module, compileContext, isTests)
     val sourceRoots = getSourceRoots(module, isTests)
     val resourceRoots = getResourceRoots(module, isTests)
     jpsModule.getContentRootsList.getUrls.foreach { url =>
       val rootDirectory = new File(new URL(url).getPath)
       val manifest = getManifestFile(rootDirectory)
-      runMonkeyc(targetDevices, module, compileContext, sdk, outputConsumer, outputDirectory, sourceRoots, resourceRoots, manifest, rootDirectory)
+      runMonkeyc(targetDevice, module, compileContext, sdk, outputConsumer, outputDirectory, sourceRoots, resourceRoots, manifest, rootDirectory)
     }
   }
 
@@ -54,11 +55,11 @@ class MonkeyBuilder extends TargetBuilder[MonkeySourceRootDescriptor, MonkeyTarg
     new File(rootDirectory.getAbsolutePath, "manifest.xml")
   }
 
-  def runMonkeyc(targetDevices: String, module: JpsTypedModule[JpsSimpleElement[JpsMonkeyModuleProperties]], compileContext: CompileContext, sdk: JpsSdk[JpsDummyElement], outputConsumer: BuildOutputConsumer, outputDirectory: File, sourceRoots: Seq[File], resourceRoots: Seq[File], manifest: File, rootDirectory: File) = {
+  def runMonkeyc(targetDevice: String, module: JpsTypedModule[JpsDummyElement], compileContext: CompileContext, sdk: JpsSdk[JpsDummyElement], outputConsumer: BuildOutputConsumer, outputDirectory: File, sourceRoots: Seq[File], resourceRoots: Seq[File], manifest: File, rootDirectory: File) = {
     val prgFile = makePrgFile(module.getName, outputDirectory)
     val prgDebugFile = makePrgDebugFile(module.getName, outputDirectory)
-    val commandLine = getCompileCommandLine(targetDevices, sdk, prgFile, sourceRoots, resourceRoots, manifest)
-//    compileContext.processMessage(new CompilerMessage(NAME, BuildMessage.Kind.ERROR, targetDevices))
+    val commandLine = getCompileCommandLine(targetDevice, sdk, prgFile, sourceRoots, resourceRoots, manifest)
+    //    compileContext.processMessage(new CompilerMessage(NAME, BuildMessage.Kind.ERROR, targetDevices))
     Try(commandLine.createProcess()) match {
       case Success(process) =>
         val handler = new BaseOSProcessHandler(process, commandLine.getCommandLineString(), Charset.defaultCharset())
@@ -72,7 +73,7 @@ class MonkeyBuilder extends TargetBuilder[MonkeySourceRootDescriptor, MonkeyTarg
   }
 
 
-  def getCompileCommandLine(targetDevices: String, sdk: JpsSdk[JpsDummyElement], targetFile: File, sourceRoots: Seq[File], resourceRoots: Seq[File], manifest: File) = {
+  def getCompileCommandLine(targetDevice: String, sdk: JpsSdk[JpsDummyElement], targetFile: File, sourceRoots: Seq[File], resourceRoots: Seq[File], manifest: File) = {
     val compiler = getCompiler(sdk)
     val commandLine = new GeneralCommandLine()
     commandLine.withWorkDirectory(targetFile.getParentFile)
@@ -85,7 +86,7 @@ class MonkeyBuilder extends TargetBuilder[MonkeySourceRootDescriptor, MonkeyTarg
     commandLine.addParameter("-z")
     commandLine.addParameter(getResourceFiles(resourceRoots))
     commandLine.addParameter("-d")
-    commandLine.addParameter(if(targetDevices.isEmpty) "square_watch" else targetDevices)
+    commandLine.addParameter(if (targetDevice.isEmpty) "square_watch" else targetDevice)
     commandLine
   }
 
@@ -128,34 +129,25 @@ class MonkeyBuilder extends TargetBuilder[MonkeySourceRootDescriptor, MonkeyTarg
     new File(outputDirectory, s"$moduleName.prg.debug.xml")
   }
 
-  def getSourceRoots(module: JpsTypedModule[JpsSimpleElement[JpsMonkeyModuleProperties]], isTests: Boolean) = {
+  def getSourceRoots(module: JpsTypedModule[JpsDummyElement], isTests: Boolean) = {
     if (isTests) getRoots(module, JavaSourceRootType.SOURCE, JavaSourceRootType.TEST_SOURCE)
     else getRoots(module, JavaSourceRootType.SOURCE)
   }
 
-  def getResourceRoots(module: JpsTypedModule[JpsSimpleElement[JpsMonkeyModuleProperties]], isTests: Boolean) = {
+  def getResourceRoots(module: JpsTypedModule[JpsDummyElement], isTests: Boolean) = {
     if (isTests) getRoots(module, JavaResourceRootType.RESOURCE, JavaResourceRootType.TEST_RESOURCE)
     else getRoots(module, JavaResourceRootType.RESOURCE)
   }
 
-  def getRoots[T <: JpsElementBase[T]](module: JpsTypedModule[JpsSimpleElement[JpsMonkeyModuleProperties]], sourceTypes: JpsModuleSourceRootType[T]*) = {
+  def getRoots[T <: JpsElementBase[T]](module: JpsTypedModule[JpsDummyElement], sourceTypes: JpsModuleSourceRootType[T]*) = {
     sourceTypes.flatMap(st => module.getSourceRoots(st)).map(_.getFile)
   }
 
-  def getTargetDevices(target: MonkeyTarget) = {
-    target.getModule.getProperties match {
-      case properties: JpsSimpleElement[JpsMonkeyModuleProperties] =>
-        val moduleProperties: JpsMonkeyModuleProperties = properties.getData
-        moduleProperties.TargetDevicesId
-      case properties => throw new ProjectBuildException(s"module properties has wrong type $properties")
-    }
-  }
-
-  def getSdk(compileContext: CompileContext, module: JpsTypedModule[JpsSimpleElement[JpsMonkeyModuleProperties]]) = {
+  def getSdk(compileContext: CompileContext, module: JpsTypedModule[JpsDummyElement]) = {
     module.getSdk(JpsMonkeySdkType())
   }
 
-  def getOutputDirectory(module: JpsTypedModule[JpsSimpleElement[JpsMonkeyModuleProperties]], compileContext: CompileContext, isTests: Boolean) = {
+  def getOutputDirectory(module: JpsTypedModule[JpsDummyElement], compileContext: CompileContext, isTests: Boolean) = {
     val javaExtensionService: JpsJavaExtensionService = JpsJavaExtensionService.getInstance
     val outputDirectory = Option(javaExtensionService.getOutputDirectory(module, isTests))
     outputDirectory match {

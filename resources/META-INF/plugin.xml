@@ -13,11 +13,10 @@
 
     <idea-version since-build="131"/>
 
-
     <depends>com.intellij.modules.lang</depends>
-    <extensions defaultExtensionNs="com.intellij">
+    <depends optional="true" config-file="java-deps.xml">com.intellij.modules.java</depends>
 
-        <compileServer.plugin classpath=".;./classes/;scala-library-2.11.8.jar;scala-reflect-2.11.8.jar;jps-plugin.jar"/>
+    <extensions defaultExtensionNs="com.intellij">
 
         <!-- Add your extensions here -->
         <fileTypeFactory implementation="com.dyrkin.monkeyc.idea.plugin.MonkeyFileTypeFactory"/>
@@ -33,10 +32,6 @@
                                 implementationClass="com.dyrkin.monkeyc.idea.plugin.MonkeyCompletionContributor"/>
         <lang.findUsagesProvider language="MonkeyC"
                                  implementationClass="com.dyrkin.monkeyc.idea.plugin.MonkeyFindUsageProvider"/>
-        <moduleType id="MONKEYC_MODULE" implementationClass="com.dyrkin.monkeyc.idea.plugin.module.MonkeyModuleType"/>
-
-        <projectStructureDetector
-                implementation="com.dyrkin.monkeyc.idea.plugin.module.MonkeyProjectStructureDetector"/>
 
         <moduleExtension implementation="com.dyrkin.monkeyc.idea.plugin.settings.TargetDeviceModuleExtension"/>
         <applicationService serviceImplementation="com.dyrkin.monkeyc.idea.plugin.settings.MonkeySettings"/>

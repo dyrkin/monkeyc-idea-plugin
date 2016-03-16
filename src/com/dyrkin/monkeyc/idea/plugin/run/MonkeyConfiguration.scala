@@ -2,6 +2,7 @@ package com.dyrkin.monkeyc.idea.plugin.run
 
 import java.util
 
+import com.dyrkin.monkeyc.idea.plugin.facet.MonkeyFacet
 import com.dyrkin.monkeyc.idea.plugin.settings.TargetDeviceModuleExtension
 import com.intellij.diagnostic.logging.LogConfigurationPanel
 import com.intellij.execution.configurations.{ConfigurationFactory, ModuleBasedConfiguration, RunConfiguration, RunProfileState}
@@ -60,12 +61,12 @@ class MonkeyConfiguration(name: String, configurationModule: MonkeyRunConfigurat
 
   def setTargetDevice(td: String): Unit = {
     targetDevice = td
-    getTargetDeviceModuleExtension.foreach(_.setTargetDevices(td))
+    getMonkeyFacet.foreach(_.getConfiguration.setTargetDevice(targetDevice))
   }
 
   //TODO Module based
-  private def getTargetDeviceModuleExtension = {
+  private def getMonkeyFacet = {
     val module = Option(getConfigurationModule.getModule).orElse(ModuleManager.getInstance(getProject).getModules.headOption)
-    module.map(m => TargetDeviceModuleExtension(m))
+    module.map(m => MonkeyFacet(m))
   }
 }

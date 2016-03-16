@@ -1,10 +1,10 @@
-package com.dyrkin.monkeyc.idea.plugin.jps
+package com.dyrkin.monkeyc.idea.plugin.facet
 
 import scala.beans.BeanProperty
 
 /**
   * @author eugene zadyra
   */
-class JpsMonkeyModuleProperties {
+class MonkeyFacetState {
   @BeanProperty var targetDeviceId: String = _
 }
