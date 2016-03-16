@@ -12,18 +12,22 @@ import scala.collection.mutable
 
 object CachedManifest {
 
-  val holder = mutable.Map[Long, MonkeyManifest]()
+  val holder = mutable.Map[Module, mutable.Map[Long, MonkeyManifest]]()
 
   def apply(module: Module) = {
     //TODO Review module.getModuleFile.getParent
     val manifest = module.getModuleFile.getParent.findFileByRelativePath("manifest.xml")
     val stamp = manifest.getModificationStamp
     holder synchronized {
-      if (!holder.contains(stamp)) {
-        holder.clear()
-        holder += stamp -> VfsUtilCore.virtualToIoFile(manifest).makeNsObj(classOf[MonkeyManifest])
+      if (!holder.contains(module)) {
+        holder += module -> mutable.Map()
       }
+      if (!holder(module).contains(stamp)) {
+        holder(module).clear()
+        holder(module) += stamp -> VfsUtilCore.virtualToIoFile(manifest).makeNsObj(classOf[MonkeyManifest])
+      }
+
     }
-    holder(stamp)
+    holder(module)(stamp)
   }
 }

@@ -1,6 +1,7 @@
 package com.dyrkin.monkeyc.idea.plugin.facet;
 
 import javax.swing.*;
+import java.util.List;
 
 /**
  * @author eugene zadyra
@@ -21,5 +22,11 @@ public class MonkeyFacetEditorForm {
         this.targetDevice.setSelectedItem(targetDeviceId);
     }
 
+    public void setTargetDevices(List<String> possibleTargets) {
+        targetDevice.removeAllItems();
+        for (String tg : possibleTargets) {
+            targetDevice.addItem(tg);
+        }
+    }
 
 }

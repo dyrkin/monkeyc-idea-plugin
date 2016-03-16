@@ -3,12 +3,14 @@ package com.dyrkin.monkeyc.idea.plugin.facet
 import javax.swing.JComponent
 
 import com.dyrkin.monkeyc.idea.plugin.jps.MonkeyConstants
-import com.intellij.facet.ui.{FacetEditorTab, FacetEditorContext}
+import com.intellij.facet.ui.{FacetEditorContext, FacetEditorTab}
+
+import scala.collection.JavaConversions._
 
 /**
   * @author eugene zadyra
   */
-class MonkeyFacetConfigurationTab(editorContext: FacetEditorContext, configuration: MonkeyFacetConfiguration, page: MonkeyFacetEditorForm) extends FacetEditorTab {
+class MonkeyFacetConfigurationTab(editorContext: FacetEditorContext, configuration: MonkeyFacetConfiguration, page: MonkeyFacetEditorForm, possibleTargets: Seq[String]) extends FacetEditorTab {
 
 
   override def createComponent(): JComponent = {
@@ -17,12 +19,13 @@ class MonkeyFacetConfigurationTab(editorContext: FacetEditorContext, configurati
 
   override def isModified: Boolean = true
 
-  override def reset() {
+  override def reset(): Unit = {
+    page.setTargetDevices(possibleTargets)
     page.setTargetDeviceId(configuration.getTargetDevice)
   }
 
   override def apply(): Unit = {
-    configuration.setTargetDevice(page.getTargetDeviceId)
+    reset()
   }
 
   override def disposeUIResources() {
