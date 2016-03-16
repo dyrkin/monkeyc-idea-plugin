@@ -33,7 +33,6 @@
         <lang.findUsagesProvider language="MonkeyC"
                                  implementationClass="com.dyrkin.monkeyc.idea.plugin.MonkeyFindUsageProvider"/>
 
-        <moduleExtension implementation="com.dyrkin.monkeyc.idea.plugin.settings.TargetDeviceModuleExtension"/>
         <applicationService serviceImplementation="com.dyrkin.monkeyc.idea.plugin.settings.MonkeySettings"/>
 
         <!-- run application -->
