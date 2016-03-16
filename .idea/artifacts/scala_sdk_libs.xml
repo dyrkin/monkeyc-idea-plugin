@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact name="scala-sdk.libs">
+    <output-path>$PROJECT_DIR$/out</output-path>
+    <root id="root">
+      <element id="library" level="project" name="scala-sdk" />
+    </root>
+  </artifact>
+</component>

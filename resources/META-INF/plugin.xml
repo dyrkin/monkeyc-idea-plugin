@@ -20,7 +20,7 @@
 
     <extensions defaultExtensionNs="com.intellij">
 
-        <compileServer.plugin classpath=".;./classes/;scala-library-2.11.8.jar;scala-reflect-2.11.8.jar"/>
+        <compileServer.plugin classpath=".;./classes/;scala-library-2.11.8.jar;scala-reflect-2.11.8.jar;jps-plugin.jar"/>
         <!--<sdkType implementation="ee.edio.garmin.sdk.MonkeySdkType"/>-->
 
         <!-- Add your extensions here -->

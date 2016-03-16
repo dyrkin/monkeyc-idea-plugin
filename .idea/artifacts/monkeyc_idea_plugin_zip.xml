@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact build-on-make="true" name="monkeyc-idea-plugin.zip">
+    <output-path>$PROJECT_DIR$/out</output-path>
+    <root id="archive" name="monkeyc-idea-plugin.zip">
+      <element id="directory" name="monkeyc-idea-plugin">
+        <element id="directory" name="lib">
+          <element id="artifact" artifact-name="jps-plugin.jar" />
+          <element id="artifact" artifact-name="monkeyc-idea-plugin.jar" />
+          <element id="artifact" artifact-name="scala-sdk.libs" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
