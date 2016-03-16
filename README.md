@@ -8,4 +8,4 @@ select the IDEA installation directory as SDK root (should be named ```IDEA SDK`
 1. Verify that **Plugin DevKit** enabled
 1. Setup the latest version of [Grammar-Kit](https://github.com/JetBrains/Grammar-Kit) plugin
 1. Setup **UI Designer** plugin
-1. Create new **Plugin** run configuration
+1. Run plugin using **run-plugin** run configuration
