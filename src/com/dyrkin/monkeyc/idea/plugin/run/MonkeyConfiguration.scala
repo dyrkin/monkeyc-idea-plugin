@@ -3,7 +3,6 @@ package com.dyrkin.monkeyc.idea.plugin.run
 import java.util
 
 import com.dyrkin.monkeyc.idea.plugin.facet.MonkeyFacet
-import com.dyrkin.monkeyc.idea.plugin.settings.TargetDeviceModuleExtension
 import com.intellij.diagnostic.logging.LogConfigurationPanel
 import com.intellij.execution.configurations.{ConfigurationFactory, ModuleBasedConfiguration, RunConfiguration, RunProfileState}
 import com.intellij.execution.runners.ExecutionEnvironment
