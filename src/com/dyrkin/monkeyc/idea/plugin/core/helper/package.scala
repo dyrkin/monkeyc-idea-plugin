@@ -2,9 +2,7 @@ package com.dyrkin.monkeyc.idea.plugin.core
 
 import java.io.File
 
-/**
-  * @author eugene zadyra
-  */
+
 package object helper {
   implicit class Directory(file: File) {
     def find(extensions: String*) = {

@@ -7,9 +7,7 @@ import org.jetbrains.jps.incremental.{TargetBuilder, BuilderService, ModuleLevel
 
 import scala.collection.JavaConversions._
 
-/**
-  * @author eugene zadyra
-  */
+
 class MonkeyBuilderService extends BuilderService {
 
 

@@ -14,9 +14,7 @@ import org.jdom.Element
 
 import scala.collection.JavaConversions._
 
-/**
-  * @author eugene zadyra
-  */
+
 class MonkeyConfiguration(name: String, configurationModule: MonkeyRunConfigurationModule, factory: ConfigurationFactory) extends ModuleBasedConfiguration[MonkeyRunConfigurationModule](name, configurationModule, factory) {
 
   var targetDevice: String = _

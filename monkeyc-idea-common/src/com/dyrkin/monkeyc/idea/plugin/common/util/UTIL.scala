@@ -6,9 +6,7 @@ import com.dyrkin.monkeyc.idea.plugin.common.marshaller.nons.NonsMarshaller
 import com.dyrkin.monkeyc.idea.plugin.common.marshaller.ns.NsMarshaller
 import org.jsoup.Jsoup
 
-/**
-  * @author eugene zadyra
-  */
+
 object UTIL {
   //String utils
   implicit class StringUtils(str: String) {

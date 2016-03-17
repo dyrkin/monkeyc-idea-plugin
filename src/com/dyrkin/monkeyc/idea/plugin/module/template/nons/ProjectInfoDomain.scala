@@ -6,9 +6,7 @@ import com.dyrkin.monkeyc.idea.plugin.module.template.ns.ManifestDomain.Permissi
 
 import scala.annotation.meta.field
 
-/**
-  * @author eugene zadyra
-  */
+
 
 object ProjectInfoDomain {
   type xmlAttribute = XmlAttribute@field

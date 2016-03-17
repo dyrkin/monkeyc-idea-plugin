@@ -5,9 +5,7 @@ import java.io.File
 import com.dyrkin.monkeyc.idea.plugin.common.util.UTIL
 import UTIL._
 
-/**
-  * @author eugene zadyra
-  */
+
 class SdkFiles(homePath: String) {
   private lazy val bin = new File(homePath, "bin").getAbsoluteFile
 

@@ -8,9 +8,7 @@ import com.intellij.openapi.editor.colors.TextAttributesKey._
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase
 import com.intellij.psi.tree.{IElementType, TokenSet}
 
-/**
-  * @author eugene zadyra
-  */
+
 class MonkeySyntaxHighlighter extends SyntaxHighlighterBase {
   val McLineComment = TextAttributesKey.createTextAttributesKey("MC.LINE_COMMENT", LINE_COMMENT)
   val McBlockComment = TextAttributesKey.createTextAttributesKey("MC.BLOCK_COMMENT", BLOCK_COMMENT)

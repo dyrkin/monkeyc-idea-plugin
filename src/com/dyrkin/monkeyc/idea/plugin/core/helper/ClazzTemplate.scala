@@ -9,9 +9,7 @@ import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
 
 import scala.collection.JavaConversions._
 
-/**
-  * @author eugene zadyra
-  */
+
 
 trait VmTemplate {
   def gen(moc: ModuleOrClass): String

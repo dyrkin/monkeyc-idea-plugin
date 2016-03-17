@@ -7,9 +7,7 @@ import com.intellij.codeInsight.lookup.LookupElementBuilder
 import com.intellij.patterns.PlatformPatterns._
 import com.intellij.util.ProcessingContext
 
-/**
-  * @author eugene zadyra
-  */
+
 class MonkeyCompletionContributor extends CompletionContributor {
   val sdk = new CompletionIndexer().scan("/Volumes/Data/Users/unkind/Documents/j2ee/software/garmin/connectiq-sdk-mac-1.2.5")
   println("Contributor initialized")

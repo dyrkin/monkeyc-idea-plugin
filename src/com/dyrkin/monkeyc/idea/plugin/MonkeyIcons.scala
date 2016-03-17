@@ -4,9 +4,7 @@ import javax.swing.Icon
 
 import com.intellij.openapi.util.IconLoader
 
-/**
-  * @author eugene zadyra
-  */
+
 object MonkeyIcons {
   val File: Icon = IconLoader.getIcon("/icons/mc_file.png")
   val Sdk: Icon = IconLoader.getIcon("/icons/sdk.png")

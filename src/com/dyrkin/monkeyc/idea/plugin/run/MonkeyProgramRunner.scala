@@ -4,9 +4,7 @@ import com.intellij.execution.configurations.{ModuleRunProfile, RunProfile}
 import com.intellij.execution.executors.DefaultRunExecutor
 import com.intellij.execution.runners.DefaultProgramRunner
 
-/**
-  * @author eugene zadyra
-  */
+
 class MonkeyProgramRunner extends DefaultProgramRunner {
   override def getRunnerId: String = "MonkeyCRunner"
 

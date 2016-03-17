@@ -22,9 +22,7 @@ import org.jetbrains.jps.model.{JpsDummyElement, JpsSimpleElement}
 import scala.collection.JavaConversions._
 import scala.util.{Failure, Success, Try}
 
-/**
-  * @author eugene zadyra
-  */
+
 class MonkeyBuilder extends TargetBuilder[MonkeySourceRootDescriptor, MonkeyTarget](MonkeyTargetType.Types) {
   val NAME = "Monkey C"
 

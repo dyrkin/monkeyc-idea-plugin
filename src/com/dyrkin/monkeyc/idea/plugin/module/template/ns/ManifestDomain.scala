@@ -4,9 +4,7 @@ import javax.xml.bind.annotation._
 
 import scala.annotation.meta.field
 
-/**
-  * @author eugene zadyra
-  */
+
 
 object ManifestDomain {
   type xmlAttribute = XmlAttribute@field

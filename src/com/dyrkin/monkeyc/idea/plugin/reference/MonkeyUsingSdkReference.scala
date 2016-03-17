@@ -9,9 +9,7 @@ import com.intellij.openapi.util.TextRange
 import com.intellij.psi.{PsiElement, PsiFileFactory, PsiReference}
 import com.intellij.util.IncorrectOperationException
 
-/**
-  * @author eugene zadyra
-  */
+
 class MonkeyUsingSdkReference(usingRef: MonkeyPsiCompositeElement, uri: String, fullUri: String) extends PsiReference {
 
   val offset = usingRef.getText.indexOf(uri)

@@ -5,9 +5,7 @@ import javax.xml.bind.JAXBContext
 
 import com.sun.xml.internal.bind.marshaller.NamespacePrefixMapper
 
-/**
-  * @author eugene zadyra
-  */
+
 object NsMarshaller {
 
   val prefixMapper = new NamespacePrefixMapper {

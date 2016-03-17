@@ -5,9 +5,7 @@ import com.intellij.openapi.project.Project
 import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.psi.{PsiFile, PsiFileFactory}
 
-/**
-  * @author eugene zadyra
-  */
+
 object MonkeyElementFactory {
 
   def createIdentifierFromText(project: Project, text: String) = {

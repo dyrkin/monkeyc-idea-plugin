@@ -8,9 +8,7 @@ import com.intellij.openapi.vfs.VfsUtilCore
 import scala.collection.mutable
 import scala.util.Try
 
-/**
-  * @author eugene zadyra
-  */
+
 
 object CachedManifest {
 

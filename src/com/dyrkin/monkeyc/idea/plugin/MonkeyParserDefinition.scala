@@ -9,9 +9,7 @@ import com.intellij.openapi.project.Project
 import com.intellij.psi.{TokenType, PsiFile, FileViewProvider, PsiElement}
 import com.intellij.psi.tree.{TokenSet, IFileElementType}
 
-/**
-  * @author eugene zadyra
-  */
+
 class MonkeyParserDefinition extends ParserDefinition {
 
   val Whitespaces = TokenSet.create(TokenType.WHITE_SPACE)

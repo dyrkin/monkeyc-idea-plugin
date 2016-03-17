@@ -10,9 +10,7 @@ import com.intellij.openapi.projectRoots.SdkTypeId
 import com.intellij.openapi.roots.ui.configuration.ModulesProvider
 import com.intellij.openapi.util.Condition
 
-/**
-  * @author eugene zadyra
-  */
+
 object MonkeyModuleType {
   private lazy val Instance = new MonkeyModuleType()
 

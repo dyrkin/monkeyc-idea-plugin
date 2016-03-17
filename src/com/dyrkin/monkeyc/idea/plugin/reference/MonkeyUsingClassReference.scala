@@ -12,9 +12,7 @@ import com.intellij.util.indexing.FileBasedIndex
 
 import scala.collection.JavaConversions._
 
-/**
-  * @author eugene zadyra
-  */
+
 class MonkeyUsingClassReference(usingRef: MonkeyPsiCompositeElement, uri: String, fullUri: String) extends PsiReference {
 
   val offset = usingRef.getText.indexOf(uri)

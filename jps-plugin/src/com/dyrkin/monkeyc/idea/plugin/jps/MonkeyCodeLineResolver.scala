@@ -5,9 +5,7 @@ import com.intellij.openapi.util.Key
 import org.jetbrains.jps.incremental.CompileContext
 import org.jetbrains.jps.incremental.messages.{BuildMessage, CompilerMessage}
 
-/**
-  * @author eugene zadyra
-  */
+
 object MonkeyCodeLineResolver {
   val FileLine = "\\s*(.*):(\\d+)\\s*:\\s*(.*)".r.unanchored
 

@@ -3,9 +3,7 @@ package com.dyrkin.monkeyc.idea.plugin
 import com.dyrkin.monkeyc.idea.plugin.psi.MonkeyTypes
 import com.intellij.psi.tree.TokenSet
 
-/**
-  * @author eugene zadyra
-  */
+
 object MonkeyTokenTypesSets {
   val Strings = TokenSet.create(MonkeyTypes.STRING)
 

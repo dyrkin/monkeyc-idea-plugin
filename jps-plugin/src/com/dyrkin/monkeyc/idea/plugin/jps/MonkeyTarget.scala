@@ -15,9 +15,7 @@ import org.jetbrains.jps.model.module.JpsModule
 
 import scala.collection.JavaConversions._
 
-/**
-  * @author eugene zadyra
-  */
+
 class MonkeyTarget(targetType: MonkeyTargetType, module: JpsModule) extends ModuleBasedTarget[MonkeySourceRootDescriptor](targetType, module) {
   override def isTests: Boolean = targetType.tests
 

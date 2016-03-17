@@ -4,9 +4,7 @@ import javax.swing.JComponent
 
 import com.intellij.ide.util.projectWizard.ModuleWizardStep
 
-/**
-  * @author eugene zadyra
-  */
+
 class PageOneWizardStep(builder: MonkeyModuleBuilder) extends ModuleWizardStep {
   val step = new PageOneWrapper
 

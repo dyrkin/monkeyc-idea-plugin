@@ -1,8 +1,6 @@
 package com.dyrkin.monkeyc.idea.plugin.module
 
-/**
-  * @author eugene zadyra
-  */
+
 class PageThreeWrapper {
   val page = new PageThree
 

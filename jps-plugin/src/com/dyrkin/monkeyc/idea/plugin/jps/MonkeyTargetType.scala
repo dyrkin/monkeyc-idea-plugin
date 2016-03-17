@@ -7,9 +7,7 @@ import org.jetbrains.jps.model.JpsModel
 
 import scala.collection.JavaConversions._
 
-/**
-  * @author eugene zadyra
-  */
+
 object MonkeyTargetType {
   val Production = new MonkeyTargetType("monkey-production", false)
   val Test = new MonkeyTargetType("monkey-test", true)

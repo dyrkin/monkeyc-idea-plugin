@@ -6,9 +6,7 @@ import com.intellij.facet.{FacetConfiguration, FacetTypeId, Facet, FacetType}
 import com.intellij.ide.util.projectWizard.ModuleBuilder
 import com.intellij.openapi.module.{ModuleType, Module}
 
-/**
-  * @author eugene zadyra
-  */
+
 object MonkeyFacetType {
   val TypeId = new FacetTypeId[MonkeyFacet](MonkeyConstants.FacetTypeId)
 }

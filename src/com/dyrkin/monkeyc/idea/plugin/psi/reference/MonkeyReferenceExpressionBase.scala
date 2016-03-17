@@ -13,9 +13,7 @@ import com.intellij.psi.{PsiElement, PsiFile, PsiNamedElement, PsiReference}
 
 import scala.collection.JavaConversions._
 
-/**
-  * @author eugene zadyra
-  */
+
 class MonkeyReferenceExpressionBase(node: ASTNode) extends MonkeyPsiCompositeElementImpl(node) with PsiNamedElement with MonkeyPsiRenameSupport {
 
   def text = this.getText.cleanup

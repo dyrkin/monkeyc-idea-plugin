@@ -15,9 +15,7 @@ import com.intellij.util.containers.ContainerUtil
 
 import scala.collection.JavaConversions._
 
-/**
-  * @author eugene zadyra
-  */
+
 class MonkeyProjectStructureDetector extends ProjectStructureDetector {
   override def detectRoots(dir: File, children: Array[File], base: File, result: util.List[DetectedProjectRoot]): DirectoryProcessingResult = {
     val pattern = ".*\\.mc".r.pattern

@@ -8,9 +8,7 @@ import com.intellij.openapi.fileTypes.FileType
 import com.intellij.patterns.ElementPattern
 import com.intellij.util.indexing.FileContent
 
-/**
-  * @author eugene zadyra
-  */
+
 object MonkeyFacetBasedFrameworkDetector {
   val DetectorId = MonkeyConstants.FacetTypeName
 }

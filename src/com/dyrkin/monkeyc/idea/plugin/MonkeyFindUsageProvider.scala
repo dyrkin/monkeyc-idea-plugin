@@ -7,9 +7,7 @@ import com.intellij.lang.findUsages.FindUsagesProvider
 import com.intellij.psi.PsiElement
 import com.intellij.psi.tree.TokenSet
 
-/**
-  * @author eugene zadyra
-  */
+
 class MonkeyFindUsageProvider extends FindUsagesProvider {
   override def getType(psiElement: PsiElement): String = "type"
 

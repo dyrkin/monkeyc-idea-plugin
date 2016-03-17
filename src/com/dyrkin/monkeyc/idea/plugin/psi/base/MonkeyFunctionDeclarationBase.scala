@@ -7,9 +7,7 @@ import com.intellij.lang.ASTNode
 import com.intellij.psi.PsiReference
 import com.intellij.psi.util.PsiTreeUtil
 
-/**
-  * @author eugene zadyra
-  */
+
 class MonkeyFunctionDeclarationBase(node: ASTNode) extends MonkeyPsiCompositeElementImpl(node) {
 
   def getFunctionNameElement = PsiTreeUtil.findChildOfType(this, classOf[MonkeyComponentName])

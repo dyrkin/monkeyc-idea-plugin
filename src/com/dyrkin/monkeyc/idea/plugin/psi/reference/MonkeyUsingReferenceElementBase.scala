@@ -9,9 +9,7 @@ import com.dyrkin.monkeyc.idea.plugin.reference.{MonkeyUsingClassReference, Monk
 import com.intellij.lang.ASTNode
 import com.intellij.psi.PsiReference
 
-/**
-  * @author eugene zadyra
-  */
+
 class MonkeyUsingReferenceElementBase(node: ASTNode) extends MonkeyPsiCompositeElementImpl(node) with MonkeyNamedElement {
 
   override def getReference: PsiReference = getReferences.headOption.orNull

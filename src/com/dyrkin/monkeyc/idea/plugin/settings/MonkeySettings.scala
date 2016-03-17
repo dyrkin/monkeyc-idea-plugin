@@ -3,9 +3,7 @@ package com.dyrkin.monkeyc.idea.plugin.settings
 import com.intellij.openapi.components._
 import com.intellij.openapi.project.Project
 
-/**
-  * @author eugene zadyra
-  */
+
 
 object MonkeySettings {
   def apply(project: Project) = {

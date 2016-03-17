@@ -27,9 +27,7 @@ import org.jetbrains.jps.model.java.JavaResourceRootType
 import scala.collection.JavaConversions._
 import UTIL._
 
-/**
-  * @author eugene zadyra
-  */
+
 class MonkeyModuleBuilder extends ModuleBuilder with SourcePathsBuilder with ModuleBuilderListener {
 
   private var pageOne: PageOneWrapper = _

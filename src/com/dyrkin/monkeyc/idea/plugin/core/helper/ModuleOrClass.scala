@@ -1,8 +1,6 @@
 package com.dyrkin.monkeyc.idea.plugin.core.helper
 
-/**
-  * @author eugene zadyra
-  */
+
 trait ModuleKind
 
 object ClazzKind extends ModuleKind

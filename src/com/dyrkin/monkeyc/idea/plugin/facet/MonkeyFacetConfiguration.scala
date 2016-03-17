@@ -8,9 +8,7 @@ import com.intellij.openapi.module.Module
 import org.jdom.Element
 import scala.collection.JavaConversions._
 
-/**
-  * @author eugene zadyra
-  */
+
 class MonkeyFacetConfiguration extends FacetConfiguration with PersistentStateComponent[MonkeyFacetState] {
 
   var facetState: MonkeyFacetState = new MonkeyFacetState

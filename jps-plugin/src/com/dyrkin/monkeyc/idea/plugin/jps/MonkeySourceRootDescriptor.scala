@@ -5,9 +5,7 @@ import java.io.{FileFilter, File}
 import com.intellij.openapi.util.io.FileUtilRt
 import org.jetbrains.jps.builders.{BuildTarget, BuildRootDescriptor}
 
-/**
-  * @author eugene zadyra
-  */
+
 class MonkeySourceRootDescriptor(root: File, target: MonkeyTarget) extends BuildRootDescriptor {
   override def getRootFile: File = root
 

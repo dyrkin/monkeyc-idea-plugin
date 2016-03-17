@@ -11,9 +11,7 @@ import org.jdom.Element
 import UTIL._
 import scala.collection.JavaConversions._
 
-/**
-  * @author eugene zadyra
-  */
+
 object ConnectIQSdk {
   def apply() = SdkType.findInstance(classOf[ConnectIQSdk])
 }

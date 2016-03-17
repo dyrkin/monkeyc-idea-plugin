@@ -7,9 +7,7 @@ import org.jetbrains.annotations.Nullable
 
 import com.intellij.openapi.fileTypes.LanguageFileType
 
-/**
-  * @author eugene zadyra
-  */
+
 object MonkeyFileType {
   val Instance = new MonkeyFileType
 

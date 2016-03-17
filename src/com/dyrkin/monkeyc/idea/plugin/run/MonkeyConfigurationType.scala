@@ -4,9 +4,7 @@ import com.dyrkin.monkeyc.idea.plugin.MonkeyIcons
 import com.intellij.execution.configurations._
 import com.intellij.openapi.project.Project
 
-/**
-  * @author eugene zadyra
-  */
+
 object MonkeyConfigurationType {
   def apply() = ConfigurationTypeUtil.findConfigurationType(classOf[MonkeyConfigurationType])
 }

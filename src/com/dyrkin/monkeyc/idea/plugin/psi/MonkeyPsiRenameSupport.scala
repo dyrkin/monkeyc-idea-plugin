@@ -4,9 +4,7 @@ import com.dyrkin.monkeyc.idea.plugin.MonkeyElementFactory
 import com.intellij.psi.PsiElement
 import com.intellij.psi.util.PsiTreeUtil
 
-/**
-  * @author eugene zadyra
-  */
+
 trait MonkeyPsiRenameSupport {
 
   def rename(element: PsiElement, newName: String) = {

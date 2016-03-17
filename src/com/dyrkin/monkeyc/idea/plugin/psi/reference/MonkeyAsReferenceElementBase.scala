@@ -9,9 +9,7 @@ import com.intellij.lang.ASTNode
 import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.psi.{PsiElement, PsiNamedElement, PsiReference}
 
-/**
-  * @author eugene zadyra
-  */
+
 class MonkeyAsReferenceElementBase(node: ASTNode) extends MonkeyPsiCompositeElementImpl(node) with PsiNamedElement with MonkeyPsiRenameSupport {
 
   override def getReference: PsiReference = getReferences.headOption.orNull

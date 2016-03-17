@@ -6,9 +6,7 @@ import com.intellij.facet.ui.{FacetEditorContext, FacetEditorTab}
 
 import scala.collection.JavaConversions._
 
-/**
-  * @author eugene zadyra
-  */
+
 class MonkeyFacetConfigurationTab(editorContext: FacetEditorContext, configuration: MonkeyFacetConfiguration, page: MonkeyFacetEditorForm, possibleTargets: Seq[String]) extends FacetEditorTab {
 
 

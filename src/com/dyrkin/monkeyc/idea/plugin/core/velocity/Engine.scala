@@ -9,9 +9,7 @@ import org.apache.velocity.runtime.RuntimeConstants
 import org.apache.velocity.runtime.log.NullLogChute
 import scala.collection.JavaConversions._
 
-/**
-  * @author eugene zadyra
-  */
+
 object Engine {
 
   lazy val VelocityEngine = {

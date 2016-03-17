@@ -1,8 +1,6 @@
 package com.dyrkin.monkeyc.idea.plugin.module
 
-/**
-  * @author eugene zadyra
-  */
+
 class PageOneWrapper {
   val page = new PageOne
 

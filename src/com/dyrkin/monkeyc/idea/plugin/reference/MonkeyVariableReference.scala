@@ -11,9 +11,7 @@ import com.intellij.psi.{PsiReferenceBase, PsiElement, PsiFileFactory, PsiRefere
 import com.intellij.util.IncorrectOperationException
 import UTIL._
 
-/**
-  * @author eugene zadyra
-  */
+
 class MonkeyVariableReference(variableUsage: MonkeyPsiCompositeElement, refText: String, variableDecl: PsiElement) extends PsiReference with MonkeyPsiRenameSupport {
 
   val offset = variableUsage.getText.indexOf(refText)

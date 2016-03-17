@@ -3,9 +3,7 @@ package com.dyrkin.monkeyc.idea.plugin.jps
 import org.jetbrains.jps.model.{JpsElementFactory, JpsElementTypeWithDefaultProperties, JpsDummyElement}
 import org.jetbrains.jps.model.library.sdk.JpsSdkType
 
-/**
-  * @author eugene zadyra
-  */
+
 object JpsMonkeySdkType {
   lazy val Instance = new JpsMonkeySdkType
 

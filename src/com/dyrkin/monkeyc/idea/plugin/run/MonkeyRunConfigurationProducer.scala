@@ -4,9 +4,7 @@ import com.intellij.execution.actions.{ConfigurationContext, RunConfigurationPro
 import com.intellij.openapi.util.Ref
 import com.intellij.psi.PsiElement
 
-/**
-  * @author eugene zadyra
-  */
+
 class MonkeyRunConfigurationProducer extends RunConfigurationProducer[MonkeyConfiguration](MonkeyConfigurationType()) {
   override def setupConfigurationFromContext(configuration: MonkeyConfiguration, context: ConfigurationContext, sourceElement: Ref[PsiElement]): Boolean = {
     Option(context.getLocation).exists { location =>

@@ -11,9 +11,7 @@ import com.intellij.openapi.util.TextRange
 import com.intellij.psi.{PsiElement, PsiFileFactory, PsiReference}
 import com.intellij.util.IncorrectOperationException
 
-/**
-  * @author eugene zadyra
-  */
+
 class MonkeyAsSdkReference(usingRef: MonkeyPsiCompositeElement, name: String, fullUri: String) extends PsiReference with MonkeyPsiRenameSupport {
 
   val offset = usingRef.getText.indexOf(name)

@@ -4,9 +4,7 @@ import com.intellij.openapi.fileTypes.{FileType, SyntaxHighlighter, SyntaxHighli
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
 
-/**
-  * @author eugene zadyra
-  */
+
 class MonkeySyntaxHighlighterFactory extends SyntaxHighlighterFactory with SyntaxHighlighterProvider {
   override def getSyntaxHighlighter(project: Project, virtualFile: VirtualFile): SyntaxHighlighter = new MonkeySyntaxHighlighter
 

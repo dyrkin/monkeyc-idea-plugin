@@ -10,9 +10,7 @@ import com.intellij.openapi.util.Computable
 import com.intellij.openapi.vfs.{VfsUtil, VirtualFile}
 import com.intellij.psi.{PsiManager, PsiElement, PsiFileFactory}
 
-/**
-  * @author eugene zadyra
-  */
+
 object Vfs {
   def saveFile(project: Project, name: String, dir: VirtualFile, content: String) = {
 

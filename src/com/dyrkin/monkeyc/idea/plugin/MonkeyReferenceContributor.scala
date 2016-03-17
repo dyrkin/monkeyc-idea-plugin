@@ -4,9 +4,7 @@ import com.intellij.patterns.PlatformPatterns
 import com.intellij.psi.{PsiElement, PsiReferenceProvider, PsiReferenceRegistrar, PsiReferenceContributor}
 import com.intellij.util.ProcessingContext
 
-/**
-  * @author eugene zadyra
-  */
+
 class MonkeyReferenceContributor extends PsiReferenceContributor {
   override def registerReferenceProviders(registrar: PsiReferenceRegistrar): Unit = {
 //    registrar.registerReferenceProvider(PlatformPatterns.psiElement(PsiLiteralExpression.class),

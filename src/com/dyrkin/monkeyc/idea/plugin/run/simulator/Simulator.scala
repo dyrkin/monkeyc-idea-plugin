@@ -8,9 +8,7 @@ import com.intellij.execution.configurations.GeneralCommandLine
 
 import scala.util.Try
 
-/**
-  * @author eugene zadyra
-  */
+
 class Simulator(val sdkLocation: String, val program: File, val deviceId: String) {
 
   val Ports = 1234 to 1238

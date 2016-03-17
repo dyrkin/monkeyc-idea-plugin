@@ -1,8 +1,6 @@
 package com.dyrkin.monkeyc.idea.plugin.common
 
-/**
-  * @author eugene zadyra
-  */
+
 object MonkeyConstants {
   val SdkTypeId = "Connect IQ SDK"
   val ModuleId = "MONKEYC_MODULE"

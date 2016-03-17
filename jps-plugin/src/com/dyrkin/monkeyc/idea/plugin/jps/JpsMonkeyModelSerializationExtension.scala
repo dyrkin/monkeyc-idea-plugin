@@ -14,9 +14,7 @@ import org.jetbrains.jps.model.{JpsElement, JpsDummyElement, JpsElementFactory, 
 
 import scala.collection.JavaConversions._
 
-/**
-  * @author eugene zadyra
-  */
+
 object JpsMonkeyModelSerializationExtension {
   val TargetDevicesId = "target-devices"
 }

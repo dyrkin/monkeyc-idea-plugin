@@ -7,9 +7,7 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.util.PsiTreeUtil
 import scala.collection.JavaConversions._
 
-/**
-  * @author eugene zadyra
-  */
+
 class MonkeyClassDeclarationBase(node: ASTNode) extends MonkeyPsiCompositeElementImpl(node) {
 
   def getClassNameElement = PsiTreeUtil.findChildOfType(this, classOf[MonkeyClassName])

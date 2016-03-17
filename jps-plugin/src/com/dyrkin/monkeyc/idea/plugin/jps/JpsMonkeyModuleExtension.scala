@@ -4,9 +4,7 @@ import com.dyrkin.monkeyc.idea.plugin.common.MonkeyConstants
 import org.jetbrains.jps.model.JpsElement
 import org.jetbrains.jps.model.ex.{JpsElementChildRoleBase, JpsElementBase}
 
-/**
-  * @author eugene zadyra
-  */
+
 object JpsMonkeyModuleExtension {
   val Kind: JpsElementChildRoleBase[JpsMonkeyModuleExtension] = JpsElementChildRoleBase.create(MonkeyConstants.FacetTypeId)
 }

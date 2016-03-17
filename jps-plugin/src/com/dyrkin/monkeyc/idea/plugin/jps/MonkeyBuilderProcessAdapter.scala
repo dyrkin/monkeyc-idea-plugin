@@ -9,9 +9,7 @@ import org.jetbrains.jps.incremental.CompileContext
 import org.jetbrains.jps.incremental.messages.{CompilerMessage, BuildMessage}
 import BuildMessage.Kind
 
-/**
-  * @author eugene zadyra
-  */
+
 class MonkeyBuilderProcessAdapter(compileContext: CompileContext, rootDirectory: File) extends ProcessAdapter {
   val Error = "ERROR:\\s*(.*)".r.unanchored
   val Warning = "WARNING:\\s*(.*)".r.unanchored

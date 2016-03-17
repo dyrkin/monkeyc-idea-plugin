@@ -10,9 +10,7 @@ import com.intellij.openapi.module.{Module, ModuleManager}
 import com.intellij.openapi.projectRoots.Sdk
 import com.intellij.openapi.roots.{CompilerModuleExtension, ModuleRootManager}
 
-/**
-  * @author eugene zadyra
-  */
+
 class MonkeyRunningState(environment: ExecutionEnvironment, configurationModule: MonkeyRunConfigurationModule, sdk: Sdk, targetDevice: String) extends CommandLineState(environment) {
 
   override def startProcess(): ProcessHandler = {

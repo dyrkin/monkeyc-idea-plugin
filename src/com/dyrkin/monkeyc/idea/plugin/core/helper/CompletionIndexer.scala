@@ -6,9 +6,7 @@ import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import scala.collection.JavaConversions._
 
-/**
-  * @author eugene zadyra
-  */
+
 class CompletionIndexer {
 
   def scan(sdk: String): Map[String, ModuleOrClass] = {

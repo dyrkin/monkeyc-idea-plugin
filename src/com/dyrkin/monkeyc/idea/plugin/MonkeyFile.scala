@@ -6,9 +6,7 @@ import com.intellij.extapi.psi.PsiFileBase
 import com.intellij.openapi.fileTypes.FileType
 import com.intellij.psi.FileViewProvider
 
-/**
-  * @author eugene zadyra
-  */
+
 class MonkeyFile(val viewProvider: FileViewProvider) extends PsiFileBase(viewProvider, MonkeyLanguage()) {
   override def getFileType: FileType = MonkeyFileType()
 

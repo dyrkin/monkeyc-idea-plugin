@@ -4,9 +4,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
-  * @author eugene zadyra
-  */
+
 //Languages
 class PageTwo implements Page {
   private JPanel panel;
