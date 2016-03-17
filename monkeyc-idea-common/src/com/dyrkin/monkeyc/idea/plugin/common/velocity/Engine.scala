@@ -1,12 +1,13 @@
-package com.dyrkin.monkeyc.idea.plugin.core.velocity
+package com.dyrkin.monkeyc.idea.plugin.common.velocity
 
-import java.io.{FileReader, StringWriter, File}
+import java.io.{File, FileReader, StringWriter}
 
 import com.intellij.openapi.vfs.CharsetToolkit
 import org.apache.velocity.VelocityContext
 import org.apache.velocity.app.VelocityEngine
 import org.apache.velocity.runtime.RuntimeConstants
 import org.apache.velocity.runtime.log.NullLogChute
+
 import scala.collection.JavaConversions._
 
 
@@ -22,7 +23,7 @@ object Engine {
     engine
   }
 
-  def evaluateToString(map: Map[String, AnyRef], file: File) = {
+  def evaluateFileToString(map: Map[String, AnyRef], file: File) = {
     val fileReader = new FileReader(file)
     val writer = new StringWriter()
     val context = new VelocityContext(map)

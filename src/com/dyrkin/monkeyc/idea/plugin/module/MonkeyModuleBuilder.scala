@@ -4,14 +4,13 @@ import java.io.File
 import java.nio.file.Paths
 import java.util
 import javax.swing.Icon
-import com.dyrkin.monkeyc.idea.plugin
+
+import com.dyrkin.monkeyc.idea.plugin.MonkeyIcons
 import com.dyrkin.monkeyc.idea.plugin.common.marshaller.ns.NsMarshaller
-import com.dyrkin.monkeyc.idea.plugin.common.util.UTIL
-import com.dyrkin.monkeyc.idea.plugin.core.velocity.Engine
+import com.dyrkin.monkeyc.idea.plugin.common.util.UTIL._
 import com.dyrkin.monkeyc.idea.plugin.module.template.nons.ProjectInfoDomain.ProjectInfo
 import com.dyrkin.monkeyc.idea.plugin.module.template.ns.ManifestDomain._
 import com.dyrkin.monkeyc.idea.plugin.sdk.ConnectIQSdk
-import com.dyrkin.monkeyc.idea.plugin.{MonkeyIcons}
 import com.intellij.compiler.CompilerWorkspaceConfiguration
 import com.intellij.ide.util.projectWizard.ModuleBuilder.ModuleConfigurationUpdater
 import com.intellij.ide.util.projectWizard.{ModuleBuilder, ModuleBuilderListener, SourcePathsBuilder}
@@ -20,12 +19,11 @@ import com.intellij.openapi.projectRoots.{Sdk, SdkTypeId}
 import com.intellij.openapi.roots.{ContentEntry, ModifiableRootModel}
 import com.intellij.openapi.util.Pair
 import com.intellij.openapi.util.io.FileUtil
-import com.intellij.openapi.vfs.{LocalFileSystem, VfsUtil, VfsUtilCore, VirtualFile}
+import com.intellij.openapi.vfs.{LocalFileSystem, VfsUtil, VirtualFile}
 import org.apache.commons.lang.WordUtils
 import org.jetbrains.jps.model.java.JavaResourceRootType
 
 import scala.collection.JavaConversions._
-import UTIL._
 
 
 class MonkeyModuleBuilder extends ModuleBuilder with SourcePathsBuilder with ModuleBuilderListener {
@@ -131,11 +129,6 @@ class MonkeyModuleBuilder extends ModuleBuilder with SourcePathsBuilder with Mod
       }
     }
   }
-//
-//  def saveTargetDevice(rootModel: ModifiableRootModel): Unit = {
-//    val extension = rootModel.getModuleExtension(classOf[TargetDeviceModuleExtension])
-//    extension.setTargetDevices(pageOne.targetPlatforms.mkString(" "))
-//  }
 
   def saveManifest(rootModel: ModifiableRootModel) = {
     val moduleName = rootModel.getModule.getName
@@ -189,7 +182,7 @@ class MonkeyModuleBuilder extends ModuleBuilder with SourcePathsBuilder with Mod
 
       //update template variables
       if (!copiedFile.getFileType.isBinary) {
-        val content = Engine.evaluateToString(context, VfsUtilCore.virtualToIoFile(copiedFile))
+        val content = copiedFile.evaluateToString(context)
         VfsUtil.saveText(copiedFile, content)
       }
     }

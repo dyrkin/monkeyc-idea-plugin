@@ -4,10 +4,15 @@ import java.io.File
 import java.util.UUID
 import com.dyrkin.monkeyc.idea.plugin.common.marshaller.nons.NonsMarshaller
 import com.dyrkin.monkeyc.idea.plugin.common.marshaller.ns.NsMarshaller
+import com.dyrkin.monkeyc.idea.plugin.common.velocity.Engine
+import com.intellij.openapi.vfs.{VfsUtilCore, VirtualFile}
 import org.jsoup.Jsoup
+
+import scala.language.implicitConversions
 
 
 object UTIL {
+
   //String utils
   implicit class StringUtils(str: String) {
     def cleanup = str.replaceAll("IntellijIdeaRulezzz", "")
@@ -41,4 +46,21 @@ object UTIL {
       NsMarshaller.unmarshall(file, clazz)
     }
   }
+
+  implicit class VelocityFile(file: File) {
+    def evaluateToString(params: Map[String, AnyRef]) = {
+      UTIL.evaluateToString(params, file)
+    }
+  }
+
+  implicit class VelocityVirtualFile(file: VirtualFile) {
+    def evaluateToString(params: Map[String, AnyRef]) = {
+      UTIL.evaluateToString(params, VfsUtilCore.virtualToIoFile(file))
+    }
+  }
+
+  private def evaluateToString(params: Map[String, AnyRef], file: File) = {
+    Engine.evaluateFileToString(params, file)
+  }
+
 }
