@@ -1,3 +1,5 @@
+##Monkeyc Idea Plugin
+This plugin is a rewritten to scala version of the https://github.com/liias/MonkeyC developed by [liias](https://github.com/liias)
 
 ## Getting started with the plugin development
 1. [Download](http://www.jetbrains.com/idea/download/) the latest IntelliJ IDEA build and install it
