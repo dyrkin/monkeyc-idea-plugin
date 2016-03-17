@@ -1,11 +1,9 @@
 package com.dyrkin.monkeyc.idea.plugin.core
 
 import java.io.File
-
-
-import com.dyrkin.monkeyc.idea.plugin.module.template.nons.NonsMarshaller
+import com.dyrkin.monkeyc.idea.plugin.common.marshaller.nons.NonsMarshaller
 import com.dyrkin.monkeyc.idea.plugin.module.template.nons.ProjectInfoDomain.ProjectInfo
-import com.dyrkin.monkeyc.idea.plugin.module.template.ns.{NsMarshaller, ManifestDomain}
+import com.dyrkin.monkeyc.idea.plugin.module.template.ns.ManifestDomain
 
 import scala.language.implicitConversions
 import scala.collection.JavaConversions._

@@ -1,16 +1,15 @@
-package com.dyrkin.monkeyc.idea
+package com.dyrkin.monkeyc.idea.plugin.common.util
 
 import java.io.File
 import java.util.UUID
-import com.dyrkin.monkeyc.idea.plugin.module.template.nons.NonsMarshaller
-import com.dyrkin.monkeyc.idea.plugin.module.template.ns.NsMarshaller
+import com.dyrkin.monkeyc.idea.plugin.common.marshaller.nons.NonsMarshaller
+import com.dyrkin.monkeyc.idea.plugin.common.marshaller.ns.NsMarshaller
 import org.jsoup.Jsoup
 
 /**
   * @author eugene zadyra
   */
-package object plugin {
-
+object UTIL {
   //String utils
   implicit class StringUtils(str: String) {
     def cleanup = str.replaceAll("IntellijIdeaRulezzz", "")
@@ -44,5 +43,4 @@ package object plugin {
       NsMarshaller.unmarshall(file, clazz)
     }
   }
-
 }

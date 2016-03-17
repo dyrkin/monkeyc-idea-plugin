@@ -1,6 +1,6 @@
 package com.dyrkin.monkeyc.idea.plugin.facet
 
-import com.dyrkin.monkeyc.idea.plugin.jps.MonkeyConstants
+import com.dyrkin.monkeyc.idea.plugin.common.MonkeyConstants
 import com.dyrkin.monkeyc.idea.plugin.module.MonkeyModuleType
 import com.intellij.facet.{FacetConfiguration, FacetTypeId, Facet, FacetType}
 import com.intellij.ide.util.projectWizard.ModuleBuilder

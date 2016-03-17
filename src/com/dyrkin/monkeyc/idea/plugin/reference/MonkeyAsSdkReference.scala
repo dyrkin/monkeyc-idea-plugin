@@ -2,9 +2,11 @@ package com.dyrkin.monkeyc.idea.plugin.reference
 
 import java.util.Date
 
-import com.dyrkin.monkeyc.idea.plugin.{StringUtils, MonkeyFileType}
+import com.dyrkin.monkeyc.idea.plugin.common.util.UTIL
+import UTIL._
+import com.dyrkin.monkeyc.idea.plugin.MonkeyFileType
 import com.dyrkin.monkeyc.idea.plugin.core.helper.SdkIndex
-import com.dyrkin.monkeyc.idea.plugin.psi.{MonkeyPsiRenameSupport, MonkeyComponentName, MonkeyPsiCompositeElement}
+import com.dyrkin.monkeyc.idea.plugin.psi.{MonkeyPsiCompositeElement, MonkeyPsiRenameSupport}
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.{PsiElement, PsiFileFactory, PsiReference}
 import com.intellij.util.IncorrectOperationException

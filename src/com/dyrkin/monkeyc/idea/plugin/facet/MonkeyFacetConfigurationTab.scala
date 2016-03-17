@@ -1,8 +1,7 @@
 package com.dyrkin.monkeyc.idea.plugin.facet
 
 import javax.swing.JComponent
-
-import com.dyrkin.monkeyc.idea.plugin.jps.MonkeyConstants
+import com.dyrkin.monkeyc.idea.plugin.common.MonkeyConstants
 import com.intellij.facet.ui.{FacetEditorContext, FacetEditorTab}
 
 import scala.collection.JavaConversions._

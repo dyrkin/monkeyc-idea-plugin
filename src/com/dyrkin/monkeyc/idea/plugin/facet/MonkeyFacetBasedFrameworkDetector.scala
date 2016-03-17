@@ -1,7 +1,7 @@
 package com.dyrkin.monkeyc.idea.plugin.facet
 
 import com.dyrkin.monkeyc.idea.plugin.MonkeyFileType
-import com.dyrkin.monkeyc.idea.plugin.jps.MonkeyConstants
+import com.dyrkin.monkeyc.idea.plugin.common.MonkeyConstants
 import com.intellij.facet.FacetType
 import com.intellij.framework.detection.{FileContentPattern, FacetBasedFrameworkDetector}
 import com.intellij.openapi.fileTypes.FileType

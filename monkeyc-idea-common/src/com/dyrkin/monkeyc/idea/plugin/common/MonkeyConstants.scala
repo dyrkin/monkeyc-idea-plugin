@@ -1,4 +1,4 @@
-package com.dyrkin.monkeyc.idea.plugin.jps
+package com.dyrkin.monkeyc.idea.plugin.common
 
 /**
   * @author eugene zadyra

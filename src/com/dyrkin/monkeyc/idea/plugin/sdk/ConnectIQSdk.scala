@@ -4,11 +4,11 @@ import java.io.File
 import javax.swing.Icon
 
 import com.dyrkin.monkeyc.idea.plugin._
-import com.dyrkin.monkeyc.idea.plugin.jps.MonkeyConstants
+import com.dyrkin.monkeyc.idea.plugin.common.MonkeyConstants
+import com.dyrkin.monkeyc.idea.plugin.common.util.UTIL
 import com.intellij.openapi.projectRoots._
-import com.intellij.openapi.vfs.VirtualFile
 import org.jdom.Element
-
+import UTIL._
 import scala.collection.JavaConversions._
 
 /**

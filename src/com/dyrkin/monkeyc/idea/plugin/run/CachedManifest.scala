@@ -1,6 +1,7 @@
 package com.dyrkin.monkeyc.idea.plugin.run
 
-import com.dyrkin.monkeyc.idea.plugin.XmlFile
+import com.dyrkin.monkeyc.idea.plugin.common.util.UTIL
+import UTIL._
 import com.dyrkin.monkeyc.idea.plugin.module.template.ns.ManifestDomain.MonkeyManifest
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.vfs.VfsUtilCore

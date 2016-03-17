@@ -1,6 +1,7 @@
 package com.dyrkin.monkeyc.idea.plugin.psi.reference
 
-import com.dyrkin.monkeyc.idea.plugin._
+import com.dyrkin.monkeyc.idea.plugin.common.util.UTIL
+import UTIL._
 import com.dyrkin.monkeyc.idea.plugin.psi.impl.MonkeyPsiCompositeElementImpl
 import com.dyrkin.monkeyc.idea.plugin.psi.{MonkeyPsiRenameSupport, MonkeyUsingDeclaration, MonkeyUsingReference}
 import com.dyrkin.monkeyc.idea.plugin.reference.MonkeyAsSdkReference

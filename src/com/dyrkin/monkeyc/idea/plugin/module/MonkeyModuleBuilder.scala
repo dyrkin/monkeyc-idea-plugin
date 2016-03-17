@@ -4,14 +4,14 @@ import java.io.File
 import java.nio.file.Paths
 import java.util
 import javax.swing.Icon
-
 import com.dyrkin.monkeyc.idea.plugin
+import com.dyrkin.monkeyc.idea.plugin.common.marshaller.ns.NsMarshaller
+import com.dyrkin.monkeyc.idea.plugin.common.util.UTIL
 import com.dyrkin.monkeyc.idea.plugin.core.velocity.Engine
 import com.dyrkin.monkeyc.idea.plugin.module.template.nons.ProjectInfoDomain.ProjectInfo
 import com.dyrkin.monkeyc.idea.plugin.module.template.ns.ManifestDomain._
-import com.dyrkin.monkeyc.idea.plugin.module.template.ns.NsMarshaller
 import com.dyrkin.monkeyc.idea.plugin.sdk.ConnectIQSdk
-import com.dyrkin.monkeyc.idea.plugin.{MonkeyIcons, XmlFile}
+import com.dyrkin.monkeyc.idea.plugin.{MonkeyIcons}
 import com.intellij.compiler.CompilerWorkspaceConfiguration
 import com.intellij.ide.util.projectWizard.ModuleBuilder.ModuleConfigurationUpdater
 import com.intellij.ide.util.projectWizard.{ModuleBuilder, ModuleBuilderListener, SourcePathsBuilder}
@@ -25,6 +25,7 @@ import org.apache.commons.lang.WordUtils
 import org.jetbrains.jps.model.java.JavaResourceRootType
 
 import scala.collection.JavaConversions._
+import UTIL._
 
 /**
   * @author eugene zadyra
@@ -144,7 +145,7 @@ class MonkeyModuleBuilder extends ModuleBuilder with SourcePathsBuilder with Mod
     val manifest = MonkeyManifest(
       Application(
         entry = appName,
-        id = plugin.genId,
+        id = genId,
         launcherIcon = "@Drawables.LauncherIcon",
         name = "@Strings.AppName",
         `type` = pageOne.applicationType,

@@ -2,7 +2,8 @@ package com.dyrkin.monkeyc.idea.plugin.sdk
 
 import java.io.File
 
-import com.dyrkin.monkeyc.idea.plugin._
+import com.dyrkin.monkeyc.idea.plugin.common.util.UTIL
+import UTIL._
 
 /**
   * @author eugene zadyra

@@ -3,6 +3,7 @@ package com.dyrkin.monkeyc.idea.plugin.psi;
 
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElementVisitor;
+import com.dyrkin.monkeyc.idea.plugin.psi.base.MonkeyNamedElement;
 import com.intellij.psi.PsiLanguageInjectionHost;
 
 public class MonkeyVisitor extends PsiElementVisitor {
@@ -88,7 +89,7 @@ public class MonkeyVisitor extends PsiElementVisitor {
   }
 
   public void visitComponentName(@NotNull MonkeyComponentName o) {
-    visitPsiCompositeElement(o);
+    visitNamedElement(o);
   }
 
   public void visitConditionalAndExpression(@NotNull MonkeyConditionalAndExpression o) {
@@ -332,6 +333,10 @@ public class MonkeyVisitor extends PsiElementVisitor {
   }
 
   public void visitVariableInitializer(@NotNull MonkeyVariableInitializer o) {
+    visitPsiCompositeElement(o);
+  }
+
+  public void visitNamedElement(@NotNull MonkeyNamedElement o) {
     visitPsiCompositeElement(o);
   }
 

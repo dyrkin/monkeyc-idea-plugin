@@ -3,7 +3,7 @@ package com.dyrkin.monkeyc.idea.plugin.module
 import javax.swing.Icon
 
 import com.dyrkin.monkeyc.idea.plugin.MonkeyIcons
-import com.dyrkin.monkeyc.idea.plugin.jps.MonkeyConstants
+import com.dyrkin.monkeyc.idea.plugin.common.MonkeyConstants
 import com.intellij.ide.util.projectWizard._
 import com.intellij.openapi.module.ModuleType
 import com.intellij.openapi.projectRoots.SdkTypeId

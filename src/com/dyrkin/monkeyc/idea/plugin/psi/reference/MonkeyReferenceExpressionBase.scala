@@ -1,6 +1,7 @@
 package com.dyrkin.monkeyc.idea.plugin.psi.reference
 
-import com.dyrkin.monkeyc.idea.plugin.StringUtils
+import com.dyrkin.monkeyc.idea.plugin.common.util.UTIL
+import UTIL._
 import com.dyrkin.monkeyc.idea.plugin.psi.MonkeyPsiRenameSupport
 import com.dyrkin.monkeyc.idea.plugin.psi.base.{MonkeyClassDeclarationBase, MonkeyFunctionDeclarationBase}
 import com.dyrkin.monkeyc.idea.plugin.psi.impl.MonkeyPsiCompositeElementImpl

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="monkeyc-idea-common.jar">
+    <output-path>$PROJECT_DIR$/out</output-path>
+    <root id="archive" name="monkeyc-idea-common.jar">
+      <element id="module-output" name="monkeyc-idea-common" />
+    </root>
+  </artifact>
+</component>

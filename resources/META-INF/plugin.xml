@@ -32,6 +32,8 @@
                                 implementationClass="com.dyrkin.monkeyc.idea.plugin.MonkeyCompletionContributor"/>
         <lang.findUsagesProvider language="MonkeyC"
                                  implementationClass="com.dyrkin.monkeyc.idea.plugin.MonkeyFindUsageProvider"/>
+        <lang.refactoringSupport language="MonkeyC"
+                                     implementationClass="com.dyrkin.monkeyc.idea.plugin.refactoring.MonkeyRefactoringSupportProvider"/>
 
         <applicationService serviceImplementation="com.dyrkin.monkeyc.idea.plugin.settings.MonkeySettings"/>
 

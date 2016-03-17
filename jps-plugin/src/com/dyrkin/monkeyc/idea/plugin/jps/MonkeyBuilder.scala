@@ -5,6 +5,7 @@ import java.io.File
 import java.net.URL
 import java.nio.charset.Charset
 
+import com.dyrkin.monkeyc.idea.plugin.common.MonkeyConstants
 import com.intellij.execution.configurations.GeneralCommandLine
 import com.intellij.execution.process.BaseOSProcessHandler
 import com.intellij.openapi.util.io.FileUtil

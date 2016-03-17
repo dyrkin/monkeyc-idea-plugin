@@ -1,4 +1,4 @@
-package com.dyrkin.monkeyc.idea.plugin.module.template.nons
+package com.dyrkin.monkeyc.idea.plugin.common.marshaller.nons
 
 import java.io.{File, StringWriter}
 import javax.xml.bind.JAXBContext

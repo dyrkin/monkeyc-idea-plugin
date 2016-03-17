@@ -2,6 +2,7 @@ package com.dyrkin.monkeyc.idea.plugin.jps
 
 import java.util
 
+import com.dyrkin.monkeyc.idea.plugin.common.MonkeyConstants
 import com.intellij.util.xmlb.XmlSerializer
 import org.jdom.Element
 import org.jetbrains.jps.model.module.JpsModule

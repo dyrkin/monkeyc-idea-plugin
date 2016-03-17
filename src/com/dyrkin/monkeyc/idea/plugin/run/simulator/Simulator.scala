@@ -2,7 +2,8 @@ package com.dyrkin.monkeyc.idea.plugin.run.simulator
 
 import java.io.File
 
-import com.dyrkin.monkeyc.idea.plugin._
+import com.dyrkin.monkeyc.idea.plugin.common.util.UTIL
+import UTIL._
 import com.intellij.execution.configurations.GeneralCommandLine
 
 import scala.util.Try

@@ -1,4 +1,4 @@
-package com.dyrkin.monkeyc.idea.plugin.module.template.ns
+package com.dyrkin.monkeyc.idea.plugin.common.marshaller.ns
 
 import java.io.{File, StringWriter}
 import javax.xml.bind.JAXBContext

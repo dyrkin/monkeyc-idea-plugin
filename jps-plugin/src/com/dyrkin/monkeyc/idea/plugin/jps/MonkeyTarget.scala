@@ -25,8 +25,6 @@ class MonkeyTarget(targetType: MonkeyTargetType, module: JpsModule) extends Modu
     val modules = JpsJavaExtensionService.dependencies(module).includedIn(JpsJavaClasspathKind.compile(isTests)).getModules
     val dependencies = modules.filter(_.getModuleType == JpsMonkeyModuleType).map(module => new MonkeyTarget(getMonkeyTargetType, module))
     if (isTests) dependencies + new MonkeyTarget(MonkeyTargetType.Production, module) else dependencies
-//    modules.flatMap(m => targetRegistry.getModuleBasedTargets(m, BuildTargetRegistry.ModuleTargetSelector.ALL))
-
   }
 
   override def getId: String = module.getName

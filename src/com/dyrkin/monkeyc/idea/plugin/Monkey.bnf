@@ -170,7 +170,9 @@ classBody ::= LBRACE classBodyDeclaration* RBRACE
 classBodyDeclaration ::= usingDeclaration | block | constDeclaration | fieldDeclaration | functionDeclaration | classDeclaration | SEMI
 
 componentName ::= id
-{mixin="com.dyrkin.monkeyc.idea.plugin.psi.reference.MonkeyUsingReferenceElementBase"}
+{
+mixin="com.dyrkin.monkeyc.idea.plugin.psi.reference.MonkeyUsingReferenceElementBase" implements="com.dyrkin.monkeyc.idea.plugin.psi.base.MonkeyNamedElement"
+}
 
 id ::= IDENTIFIER
 

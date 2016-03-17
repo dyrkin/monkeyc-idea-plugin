@@ -1,7 +1,9 @@
 package com.dyrkin.monkeyc.idea.plugin.psi.reference
 
-import com.dyrkin.monkeyc.idea.plugin._
+import com.dyrkin.monkeyc.idea.plugin.common.util.UTIL
+import UTIL._
 import com.dyrkin.monkeyc.idea.plugin.psi.MonkeyUsingReference
+import com.dyrkin.monkeyc.idea.plugin.psi.base.MonkeyNamedElement
 import com.dyrkin.monkeyc.idea.plugin.psi.impl.MonkeyPsiCompositeElementImpl
 import com.dyrkin.monkeyc.idea.plugin.reference.{MonkeyUsingClassReference, MonkeyUsingSdkReference}
 import com.intellij.lang.ASTNode
@@ -10,7 +12,7 @@ import com.intellij.psi.PsiReference
 /**
   * @author eugene zadyra
   */
-class MonkeyUsingReferenceElementBase(node: ASTNode) extends MonkeyPsiCompositeElementImpl(node) {
+class MonkeyUsingReferenceElementBase(node: ASTNode) extends MonkeyPsiCompositeElementImpl(node) with MonkeyNamedElement {
 
   override def getReference: PsiReference = getReferences.headOption.orNull
 

@@ -1,6 +1,6 @@
 package com.dyrkin.monkeyc.idea.plugin.facet
 
-import com.dyrkin.monkeyc.idea.plugin.jps.MonkeyConstants
+import com.dyrkin.monkeyc.idea.plugin.common.MonkeyConstants
 import com.intellij.facet.{FacetManager, FacetConfiguration, FacetType, Facet}
 import com.intellij.openapi.module.Module
 
