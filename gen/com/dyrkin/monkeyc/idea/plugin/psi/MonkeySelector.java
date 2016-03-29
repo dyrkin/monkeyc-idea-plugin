@@ -14,6 +14,6 @@ public interface MonkeySelector extends MonkeyPsiCompositeElement {
   MonkeyExpression getExpression();
 
   @Nullable
-  PsiElement getIdentifier();
+  MonkeyId getId();
 
 }

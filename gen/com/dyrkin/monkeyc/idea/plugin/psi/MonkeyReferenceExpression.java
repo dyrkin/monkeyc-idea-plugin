@@ -10,4 +10,7 @@ public interface MonkeyReferenceExpression extends MonkeyPsiCompositeElement {
   @NotNull
   MonkeyComponentName getComponentName();
 
+  @Nullable
+  MonkeyIdentifierSuffix getIdentifierSuffix();
+
 }

@@ -29,8 +29,14 @@ public class MonkeyBitwiseExpressionImpl extends MonkeyPsiCompositeElementImpl i
 
   @Override
   @NotNull
-  public List<MonkeyUnaryExpression> getUnaryExpressionList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, MonkeyUnaryExpression.class);
+  public List<MonkeyPrimary> getPrimaryList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, MonkeyPrimary.class);
+  }
+
+  @Override
+  @NotNull
+  public List<MonkeySelector> getSelectorList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, MonkeySelector.class);
   }
 
 }

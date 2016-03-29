@@ -15,7 +15,6 @@ public interface MonkeyTypes {
   IElementType ARRAY_CREATOR = new MonkeyElementType("ARRAY_CREATOR");
   IElementType ARRAY_INITIALIZER = new MonkeyElementType("ARRAY_INITIALIZER");
   IElementType ASSIGNMENT_OPERATOR = new MonkeyElementType("ASSIGNMENT_OPERATOR");
-  IElementType AS_REFERENCE = new MonkeyElementType("AS_REFERENCE");
   IElementType BITWISE_EXPRESSION = new MonkeyElementType("BITWISE_EXPRESSION");
   IElementType BITWISE_OPERATOR = new MonkeyElementType("BITWISE_OPERATOR");
   IElementType BLOCK = new MonkeyElementType("BLOCK");
@@ -83,10 +82,7 @@ public interface MonkeyTypes {
   IElementType SYMBOL = new MonkeyElementType("SYMBOL");
   IElementType TRY_STATEMENT = new MonkeyElementType("TRY_STATEMENT");
   IElementType TYPE = new MonkeyElementType("TYPE");
-  IElementType UNARY_EXPRESSION = new MonkeyElementType("UNARY_EXPRESSION");
-  IElementType UNARY_EXPRESSION_NOT_PLUS_MINUS = new MonkeyElementType("UNARY_EXPRESSION_NOT_PLUS_MINUS");
   IElementType USING_DECLARATION = new MonkeyElementType("USING_DECLARATION");
-  IElementType USING_REFERENCE = new MonkeyElementType("USING_REFERENCE");
   IElementType VARIABLE_DECLARATION_NAME = new MonkeyElementType("VARIABLE_DECLARATION_NAME");
   IElementType VARIABLE_DECLARATOR = new MonkeyElementType("VARIABLE_DECLARATOR");
   IElementType VARIABLE_INITIALIZER = new MonkeyElementType("VARIABLE_INITIALIZER");
@@ -206,9 +202,6 @@ public interface MonkeyTypes {
       }
       else if (type == ASSIGNMENT_OPERATOR) {
         return new MonkeyAssignmentOperatorImpl(node);
-      }
-      else if (type == AS_REFERENCE) {
-        return new MonkeyAsReferenceImpl(node);
       }
       else if (type == BITWISE_EXPRESSION) {
         return new MonkeyBitwiseExpressionImpl(node);
@@ -411,17 +404,8 @@ public interface MonkeyTypes {
       else if (type == TYPE) {
         return new MonkeyTypeImpl(node);
       }
-      else if (type == UNARY_EXPRESSION) {
-        return new MonkeyUnaryExpressionImpl(node);
-      }
-      else if (type == UNARY_EXPRESSION_NOT_PLUS_MINUS) {
-        return new MonkeyUnaryExpressionNotPlusMinusImpl(node);
-      }
       else if (type == USING_DECLARATION) {
         return new MonkeyUsingDeclarationImpl(node);
-      }
-      else if (type == USING_REFERENCE) {
-        return new MonkeyUsingReferenceImpl(node);
       }
       else if (type == VARIABLE_DECLARATION_NAME) {
         return new MonkeyVariableDeclarationNameImpl(node);

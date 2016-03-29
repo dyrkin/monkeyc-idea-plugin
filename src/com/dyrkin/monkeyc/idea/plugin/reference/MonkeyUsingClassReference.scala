@@ -13,11 +13,7 @@ import com.intellij.util.indexing.FileBasedIndex
 import scala.collection.JavaConversions._
 
 
-class MonkeyUsingClassReference(usingRef: MonkeyPsiCompositeElement, uri: String, fullUri: String) extends PsiReference {
-
-  val offset = usingRef.getText.indexOf(uri)
-
-  val range = TextRange.create(offset, offset + uri.length())
+class MonkeyUsingClassReference(usingRef: MonkeyPsiCompositeElement, fullUri: String, range: TextRange) extends PsiReference {
 
   val project = usingRef.getProject
 
@@ -30,7 +26,7 @@ class MonkeyUsingClassReference(usingRef: MonkeyPsiCompositeElement, uri: String
     }.map(f => PsiTreeUtil.findChildOfAnyType(f, classOf[MonkeyClassName]).getText).toArray :+ "Toybox"
   }
 
-  override def getCanonicalText: String = uri
+  override def getCanonicalText: String = fullUri
 
   override def getElement: PsiElement = usingRef
 
@@ -49,7 +45,7 @@ class MonkeyUsingClassReference(usingRef: MonkeyPsiCompositeElement, uri: String
     val files = virtualFiles.map(f => PsiManager.getInstance(project).findFile(f)).filterNot(_ == null)
     files.find { f =>
       val clazz = PsiTreeUtil.findChildOfAnyType(f, classOf[MonkeyClassName])
-      clazz != null && clazz.getText == uri
+      clazz != null && clazz.getText == fullUri
     }.map(f => PsiTreeUtil.findChildOfAnyType(f, classOf[MonkeyClassName])).orNull
   }
 }

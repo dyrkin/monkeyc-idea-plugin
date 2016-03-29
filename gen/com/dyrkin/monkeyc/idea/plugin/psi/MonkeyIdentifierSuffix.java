@@ -13,7 +13,4 @@ public interface MonkeyIdentifierSuffix extends MonkeyPsiCompositeElement {
   @NotNull
   List<MonkeyExpression> getExpressionList();
 
-  @Nullable
-  PsiElement getIdentifier();
-
 }

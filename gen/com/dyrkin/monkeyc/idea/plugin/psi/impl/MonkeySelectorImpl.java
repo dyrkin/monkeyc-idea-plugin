@@ -35,8 +35,8 @@ public class MonkeySelectorImpl extends MonkeyPsiCompositeElementImpl implements
 
   @Override
   @Nullable
-  public PsiElement getIdentifier() {
-    return findChildByType(IDENTIFIER);
+  public MonkeyId getId() {
+    return findChildByClass(MonkeyId.class);
   }
 
 }

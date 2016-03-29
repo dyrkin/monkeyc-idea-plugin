@@ -28,4 +28,10 @@ public class MonkeyReferenceExpressionImpl extends MonkeyReferenceExpressionBase
     return findNotNullChildByClass(MonkeyComponentName.class);
   }
 
+  @Override
+  @Nullable
+  public MonkeyIdentifierSuffix getIdentifierSuffix() {
+    return findChildByClass(MonkeyIdentifierSuffix.class);
+  }
+
 }

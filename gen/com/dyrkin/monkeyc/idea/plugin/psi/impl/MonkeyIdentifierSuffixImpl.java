@@ -33,10 +33,4 @@ public class MonkeyIdentifierSuffixImpl extends MonkeyPsiCompositeElementImpl im
     return PsiTreeUtil.getChildrenOfTypeAsList(this, MonkeyExpression.class);
   }
 
-  @Override
-  @Nullable
-  public PsiElement getIdentifier() {
-    return findChildByType(IDENTIFIER);
-  }
-
 }

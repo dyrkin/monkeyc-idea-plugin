@@ -3,7 +3,6 @@ package com.dyrkin.monkeyc.idea.plugin.psi;
 
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElementVisitor;
-import com.dyrkin.monkeyc.idea.plugin.psi.base.MonkeyNamedElement;
 import com.intellij.psi.PsiLanguageInjectionHost;
 
 public class MonkeyVisitor extends PsiElementVisitor {
@@ -29,10 +28,6 @@ public class MonkeyVisitor extends PsiElementVisitor {
   }
 
   public void visitArrayInitializer(@NotNull MonkeyArrayInitializer o) {
-    visitPsiCompositeElement(o);
-  }
-
-  public void visitAsReference(@NotNull MonkeyAsReference o) {
     visitPsiCompositeElement(o);
   }
 
@@ -89,7 +84,7 @@ public class MonkeyVisitor extends PsiElementVisitor {
   }
 
   public void visitComponentName(@NotNull MonkeyComponentName o) {
-    visitNamedElement(o);
+    visitPsiCompositeElement(o);
   }
 
   public void visitConditionalAndExpression(@NotNull MonkeyConditionalAndExpression o) {
@@ -308,19 +303,7 @@ public class MonkeyVisitor extends PsiElementVisitor {
     visitPsiCompositeElement(o);
   }
 
-  public void visitUnaryExpression(@NotNull MonkeyUnaryExpression o) {
-    visitPsiCompositeElement(o);
-  }
-
-  public void visitUnaryExpressionNotPlusMinus(@NotNull MonkeyUnaryExpressionNotPlusMinus o) {
-    visitPsiCompositeElement(o);
-  }
-
   public void visitUsingDeclaration(@NotNull MonkeyUsingDeclaration o) {
-    visitPsiCompositeElement(o);
-  }
-
-  public void visitUsingReference(@NotNull MonkeyUsingReference o) {
     visitPsiCompositeElement(o);
   }
 
@@ -333,10 +316,6 @@ public class MonkeyVisitor extends PsiElementVisitor {
   }
 
   public void visitVariableInitializer(@NotNull MonkeyVariableInitializer o) {
-    visitPsiCompositeElement(o);
-  }
-
-  public void visitNamedElement(@NotNull MonkeyNamedElement o) {
     visitPsiCompositeElement(o);
   }
 

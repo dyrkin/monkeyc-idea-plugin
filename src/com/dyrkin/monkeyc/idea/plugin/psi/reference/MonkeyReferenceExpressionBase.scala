@@ -2,7 +2,7 @@ package com.dyrkin.monkeyc.idea.plugin.psi.reference
 
 import com.dyrkin.monkeyc.idea.plugin.common.util.UTIL
 import UTIL._
-import com.dyrkin.monkeyc.idea.plugin.psi.MonkeyPsiRenameSupport
+import com.dyrkin.monkeyc.idea.plugin.psi.{MonkeyUsingDeclaration, MonkeyTypes, MonkeyPsiRenameSupport}
 import com.dyrkin.monkeyc.idea.plugin.psi.base.{MonkeyClassDeclarationBase, MonkeyFunctionDeclarationBase}
 import com.dyrkin.monkeyc.idea.plugin.psi.impl.MonkeyPsiCompositeElementImpl
 import com.dyrkin.monkeyc.idea.plugin.reference.MonkeyVariableReference
@@ -21,7 +21,25 @@ class MonkeyReferenceExpressionBase(node: ASTNode) extends MonkeyPsiCompositeEle
   override def getReference: PsiReference = getReferences.headOption.orNull
 
   override def getReferences: Array[PsiReference] = {
-    lookAtFunctionParameterList().orElse(lookAtFunctionBody()).orElse(lookAtClassBody()).orElse(lookAtFile()).getOrElse(Array())
+    if(getParent.isInstanceOf[MonkeyReferenceExpressionBase] && getPrevSibling.tokenType == MonkeyTypes.DOT) {
+      resolveRecursivelly()
+    } else {
+      resolve()
+    }
+  }
+
+  def resolveRecursivelly() = {
+    lookAtFunctionParameterList()
+      .orElse(lookAtFunctionBody())
+      .orElse(lookAtClassBody())
+      .orElse(lookAtFile()).getOrElse(Array())
+  }
+
+  def resolve() = {
+    lookAtFunctionParameterList()
+      .orElse(lookAtFunctionBody())
+      .orElse(lookAtClassBody())
+      .orElse(lookAtFile()).getOrElse(Array())
   }
 
   def lookAtFunctionBody() = {
@@ -61,8 +79,8 @@ class MonkeyReferenceExpressionBase(node: ASTNode) extends MonkeyPsiCompositeEle
     val file = findParentFile()
     file flatMap { f =>
       val as = findAsReferences(f)
-      val res: Array[PsiReference] = as.filter(_.getText == text).map { a =>
-        new MonkeyVariableReference(this, text, a)
+      val res: Array[PsiReference] = as.filter(_.getComponentName.getText == text).map { a =>
+        new MonkeyVariableReference(this, text, a.getComponentName)
       }.toArray
       if(res.isEmpty) None else Some(res)
     }
@@ -85,7 +103,7 @@ class MonkeyReferenceExpressionBase(node: ASTNode) extends MonkeyPsiCompositeEle
   }
 
   def findAsReferences(element: PsiElement) = {
-    PsiTreeUtil.findChildrenOfType(element, classOf[MonkeyAsReferenceElementBase])
+    PsiTreeUtil.findChildrenOfType(element, classOf[MonkeyUsingDeclaration])
   }
 
   override def setName(name: String): PsiElement = rename(this, name)

@@ -11,6 +11,9 @@ public interface MonkeyBitwiseExpression extends MonkeyPsiCompositeElement {
   List<MonkeyBitwiseOperator> getBitwiseOperatorList();
 
   @NotNull
-  List<MonkeyUnaryExpression> getUnaryExpressionList();
+  List<MonkeyPrimary> getPrimaryList();
+
+  @NotNull
+  List<MonkeySelector> getSelectorList();
 
 }

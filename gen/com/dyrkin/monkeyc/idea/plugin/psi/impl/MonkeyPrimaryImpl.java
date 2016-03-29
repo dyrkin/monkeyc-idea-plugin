@@ -29,12 +29,6 @@ public class MonkeyPrimaryImpl extends MonkeyPsiCompositeElementImpl implements 
 
   @Override
   @Nullable
-  public MonkeyIdentifierSuffix getIdentifierSuffix() {
-    return findChildByClass(MonkeyIdentifierSuffix.class);
-  }
-
-  @Override
-  @Nullable
   public MonkeyLiteral getLiteral() {
     return findChildByClass(MonkeyLiteral.class);
   }
@@ -46,9 +40,9 @@ public class MonkeyPrimaryImpl extends MonkeyPsiCompositeElementImpl implements 
   }
 
   @Override
-  @NotNull
-  public List<MonkeyReferenceExpression> getReferenceExpressionList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, MonkeyReferenceExpression.class);
+  @Nullable
+  public MonkeyReferenceExpression getReferenceExpression() {
+    return findChildByClass(MonkeyReferenceExpression.class);
   }
 
   @Override

@@ -10,14 +10,10 @@ import com.intellij.psi.{PsiElement, PsiFileFactory, PsiReference}
 import com.intellij.util.IncorrectOperationException
 
 
-class MonkeyUsingSdkReference(usingRef: MonkeyPsiCompositeElement, uri: String, fullUri: String) extends PsiReference {
-
-  val offset = usingRef.getText.indexOf(uri)
-
-  val range = TextRange.create(offset, offset + uri.length())
+class MonkeyUsingSdkReference(referenceWhat: MonkeyPsiCompositeElement, fullUri: String, range: TextRange) extends PsiReference {
 
   override def getVariants: Array[AnyRef] = {
-    val res: Array[AnyRef] = if (usingRef.isInstanceOf[MonkeyComponentName]) {
+    val res: Array[AnyRef] = if (referenceWhat.isInstanceOf[MonkeyComponentName]) {
       val prefix = (fullUri + "1").split("\\.").init.mkString(".")
       def makeSuggestion(s: String) = s.replaceAllLiterally(s"${if (prefix.isEmpty) fullUri else prefix + "."}", "").split("\\.").head
       SdkIndex.getAllSdkUris().filter(_.startsWith(s"$fullUri")).map(makeSuggestion).toArray
@@ -25,11 +21,11 @@ class MonkeyUsingSdkReference(usingRef: MonkeyPsiCompositeElement, uri: String, 
     res
   }
 
-  override def getCanonicalText: String = uri
+  override def getCanonicalText: String = range.substring(referenceWhat.getText)
 
-  override def getElement: PsiElement = usingRef
+  override def getElement: PsiElement = referenceWhat
 
-  override def isReferenceTo(element: PsiElement): Boolean = element != null && element.equals(resolve())
+  override def isReferenceTo(element: PsiElement): Boolean = false
 
   override def bindToElement(psiElement: PsiElement): PsiElement = throw new IncorrectOperationException("Library from Connect IQ SDK can't be renamed")
 
@@ -40,12 +36,10 @@ class MonkeyUsingSdkReference(usingRef: MonkeyPsiCompositeElement, uri: String, 
   override def getRangeInElement: TextRange = range
 
   override def resolve(): PsiElement = {
-    val refLength = fullUri.indexOf(uri) + uri.length
-    val ref = fullUri.substring(0, refLength)
-    SdkIndex.sdkFiles.get(ref).map { file =>
+    SdkIndex.sdkFiles.get(fullUri).map { file =>
       //create and open pseudo file
-      val factory = PsiFileFactory.getInstance(usingRef.getProject)
-      factory.createFileFromText(ref, MonkeyFileType(), file, new Date().getTime, true)
+      val factory = PsiFileFactory.getInstance(referenceWhat.getProject)
+      factory.createFileFromText(fullUri, MonkeyFileType(), file, new Date().getTime, true)
     }.orNull
 
   }

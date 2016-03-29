@@ -8,9 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface MonkeyUsingDeclaration extends MonkeyPsiCompositeElement {
 
   @Nullable
-  MonkeyAsReference getAsReference();
+  MonkeyComponentName getComponentName();
 
   @Nullable
-  MonkeyUsingReference getUsingReference();
+  MonkeyQualifiedName getQualifiedName();
 
 }

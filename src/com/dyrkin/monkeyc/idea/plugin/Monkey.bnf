@@ -137,17 +137,15 @@ monkeyCFile ::= compilationUnit*
 private compilationUnit ::= usingDeclaration | moduleDeclaration | constDeclaration | fieldDeclaration
                           | functionDeclaration | classDeclaration | blockStatement | SEMI
 
-usingDeclaration ::= USING usingReference (AS asReference)? SEMI {pin=1}
+usingDeclaration ::= 'using' qualifiedName ('as' componentName)? ';' {
+    pin=1 extends="com.dyrkin.monkeyc.idea.plugin.psi.reference.MonkeyUsingDeclarationElementBase"
+}
 
-usingReference ::= qualifiedName
-
-asReference ::= componentName{mixin="com.dyrkin.monkeyc.idea.plugin.psi.reference.MonkeyAsReferenceElementBase"}
-
-moduleDeclaration ::= modifiers MODULE componentName moduleBody
+moduleDeclaration ::= modifiers 'module' componentName moduleBody
 
 moduleBody ::= classBody
 
-classDeclaration ::= modifiers CLASS className (EXTENDS type)? classBody
+classDeclaration ::= modifiers 'class' className (EXTENDS type)? classBody
                    | modifiers ENUM componentName? enumBody
                    {mixin="com.dyrkin.monkeyc.idea.plugin.psi.base.MonkeyClassDeclarationBase"}
 
@@ -157,7 +155,7 @@ modifiers ::= annotation? STATIC? HIDDEN?
 
 annotation ::= LPAREN symbol RPAREN
 
-enumBody ::= LBRACE enumConstants? COMMA? enumBodyDeclarations? RBRACE
+enumBody ::= '{' enumConstants? COMMA? enumBodyDeclarations? '}'
 
 enumConstants ::= enumConstant (COMMA enumConstant)*
 
@@ -165,31 +163,31 @@ enumConstant ::= componentName (EQ INTLITERAL)?
 
 enumBodyDeclarations ::= SEMI classBodyDeclaration*
 
-classBody ::= LBRACE classBodyDeclaration* RBRACE
+classBody ::= '{' classBodyDeclaration* '}'
 
 classBodyDeclaration ::= usingDeclaration | block | constDeclaration | fieldDeclaration | functionDeclaration | classDeclaration | SEMI
 
 componentName ::= id
 {
-mixin="com.dyrkin.monkeyc.idea.plugin.psi.reference.MonkeyUsingReferenceElementBase" implements="com.dyrkin.monkeyc.idea.plugin.psi.base.MonkeyNamedElement"
+    extends="com.dyrkin.monkeyc.idea.plugin.psi.base.MonkeyNamedElement"
 }
 
 id ::= IDENTIFIER
 
-functionDeclaration ::= modifiers FUNCTION componentName formalParameters (THROWS qualifiedNameList)?
-                        LBRACE (explicitConstructorInvocation)? (blockStatement)* RBRACE {
+functionDeclaration ::= modifiers 'function' componentName formalParameters (THROWS qualifiedNameList)?
+                        '{' (explicitConstructorInvocation)? (blockStatement)* '}' {
   pin=3
   mixin="com.dyrkin.monkeyc.idea.plugin.psi.base.MonkeyFunctionDeclarationBase"
 }
 
-constDeclaration ::= modifiers CONST variableDeclarator SEMI
+constDeclaration ::= modifiers 'const' variableDeclarator SEMI
 
-fieldDeclaration ::= modifiers VAR variableDeclarator
+fieldDeclaration ::= modifiers 'var' variableDeclarator
                     (COMMA variableDeclarator)* SEMI
 
-variableDeclarator ::= variableDeclarationName (LBRACKET RBRACKET)* (EQ variableInitializer)?
+variableDeclarator ::= variableDeclarationName ('[' ']')* (EQ variableInitializer)?
 variableDeclarationName ::= componentName {mixin="com.dyrkin.monkeyc.idea.plugin.psi.base.MonkeyVariableDeclarationNameBase"}
-type ::= qualifiedName (LBRACKET RBRACKET)*
+type ::= qualifiedName ('[' ']')*
 
 qualifiedNameList ::= qualifiedName (COMMA qualifiedName)*
 
@@ -197,7 +195,7 @@ formalParameters ::= LPAREN (formalParameterDecls)? RPAREN
 
 formalParameterDecls ::= normalParameterDecl (COMMA normalParameterDecl)*
 
-normalParameterDecl ::= componentName (LBRACKET RBRACKET)* {mixin="com.dyrkin.monkeyc.idea.plugin.psi.base.MonkeyVariableDeclarationNameBase"}
+normalParameterDecl ::= componentName ('[' ']')* {mixin="com.dyrkin.monkeyc.idea.plugin.psi.base.MonkeyVariableDeclarationNameBase"}
 
 //NOTE: the position of Identifier 'super' is set to the type args position here
 explicitConstructorInvocation ::= SUPER arguments SEMI
@@ -205,7 +203,7 @@ explicitConstructorInvocation ::= SUPER arguments SEMI
 
 qualifiedName ::= componentName (DOT componentName)*
 
-block ::= LBRACE blockStatement* RBRACE
+block ::= '{' blockStatement* '}'
 
 blockStatement ::= localVariableDeclarationStatement
                  | classDeclaration
@@ -213,7 +211,7 @@ blockStatement ::= localVariableDeclarationStatement
 
 localVariableDeclarationStatement ::= localVariableDeclaration SEMI
 
-localVariableDeclaration ::= VAR variableDeclarator (COMMA variableDeclarator)*
+localVariableDeclaration ::= 'var' variableDeclarator (COMMA variableDeclarator)*
 
 statement ::= block
             | IF parExpression statement (ELSE statement)?
@@ -221,8 +219,8 @@ statement ::= block
             | WHILE parExpression statement
             | DO statement WHILE parExpression SEMI
             | tryStatement
-            | SWITCH parExpression LBRACE switchBlockStatementGroups RBRACE
-            | RETURN expression? SEMI
+            | SWITCH parExpression '{' switchBlockStatementGroups '}'
+            | 'return' expression? SEMI
             | THROW expression SEMI
             | BREAK referenceExpression? SEMI
             | CONTINUE referenceExpression? SEMI
@@ -242,7 +240,7 @@ catches ::= catchClause (catchClause)*
 
 catchClause ::= CATCH LPAREN catchParameter RPAREN block
 
-catchParameter ::= IDENTIFIER (LBRACKET RBRACKET)*
+catchParameter ::= IDENTIFIER ('[' ']')*
 
 forStatement ::= FOR LPAREN forInit? SEMI expression? SEMI expressionList? RPAREN statement
 
@@ -305,63 +303,59 @@ bitwiseExpression ::= unaryExpression (bitwiseOperator unaryExpression)*
  * NOTE: for '+' and '-', if the next token is int or long integral, then it's not a unary expression.
  *       it's a literal with signed value. INTLITERAL AND LONG LITERAL are added here for this.
  */
-unaryExpression ::= PLUS unaryExpression
-                  | SUB unaryExpression
-                  | PLUSPLUS unaryExpression
-                  | SUBSUB unaryExpression
+private unaryExpression ::= '+' unaryExpression
+                  | '-' unaryExpression
+                  | '++' unaryExpression
+                  | '--' unaryExpression
                   | unaryExpressionNotPlusMinus
 
-unaryExpressionNotPlusMinus ::= TILDE unaryExpression
+private unaryExpressionNotPlusMinus ::= '~' unaryExpression
                               | BANG unaryExpression
-                              | primary selector* (PLUSPLUS | SUBSUB)?
+                              | primary selector* ('++' | '--')?
 
 /**
  * have to use scope here, parameter passing isn't well supported in antlr.
  */
 primary ::= parExpression
-          | referenceExpression qualifiedReferenceExpression* identifierSuffix?
+          | qualifiedReferenceExpression
           | literal
           | symbol
           | creator
-          | VOID DOT CLASS {
+          | VOID '.' 'class' {
 
 }
 
-referenceExpression ::= componentName {
+referenceExpression ::= componentName identifierSuffix? {
   mixin="com.dyrkin.monkeyc.idea.plugin.psi.reference.MonkeyReferenceExpressionBase"
 }
 
-qualifiedReferenceExpression ::= DOT referenceExpression {elementType="referenceExpression"}
+qualifiedReferenceExpression ::= referenceExpression ('.' referenceExpression)* {elementType="referenceExpression"}
 
-identifierSuffix ::= (LBRACKET RBRACKET) + DOT CLASS
-                   | (LBRACKET expression RBRACKET)+
+identifierSuffix ::= ('[' expression? ']')+
                    | arguments
-                   | DOT CLASS
-                   | DOT IDENTIFIER arguments
-                   | DOT SUPER arguments
 
-selector ::= DOT IDENTIFIER (arguments)?
-           | LBRACKET expression RBRACKET
+selector ::= '.' id (arguments)?
+           | '[' expression ']'
 
 creator ::= objectCreator | arrayCreator
-objectCreator ::= NEW qualifiedName classCreatorRest {pin=2}
+objectCreator ::= 'new' qualifiedName classCreatorRest {pin=2}
 
-arrayCreator ::= NEW LBRACKET expression RBRACKET // new [expression evaluating to integer]
-               | LBRACKET (expression (COMMA expression)* )? RBRACKET // [expression1, expression2, ...]
+arrayCreator ::= 'new' '[' expression ']' // new [expression evaluating to integer]
+               | '[' (expression (COMMA expression)* )? ']' // [expression1, expression2, ...]
                | dictionaryCreator
 
-dictionaryCreator ::= NEW LBRACE RBRACE // new {}
-                    | LBRACE (keyValueInitializer (COMMA keyValueInitializer)* )? RBRACE // {"a"=> exp, :b => exp2, ...}
+dictionaryCreator ::= 'new' '{' '}' // new {}
+                    | '{' (keyValueInitializer (',' keyValueInitializer)* )? '}' // {"a"=> exp, :b => exp2, ...}
 
 keyValueInitializer ::= primary EQGT expression
 
-arrayInitializer ::= LBRACE (variableInitializer (COMMA variableInitializer)*)? (COMMA)? RBRACE
+arrayInitializer ::= '{' (variableInitializer (',' variableInitializer)*)? ','? '}'
 
 variableInitializer ::= arrayInitializer | expression
 
 classCreatorRest ::= arguments classBody?
 
-arguments ::= LPAREN (expressionList)? RPAREN
+arguments ::= '(' (expressionList)? ')'
 
 symbol ::= COLON IDENTIFIER {pin=1}
 
