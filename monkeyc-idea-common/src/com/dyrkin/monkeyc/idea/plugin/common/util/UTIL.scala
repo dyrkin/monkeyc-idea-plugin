@@ -6,6 +6,7 @@ import com.dyrkin.monkeyc.idea.plugin.common.marshaller.nons.NonsMarshaller
 import com.dyrkin.monkeyc.idea.plugin.common.marshaller.ns.NsMarshaller
 import com.dyrkin.monkeyc.idea.plugin.common.velocity.Engine
 import com.intellij.openapi.vfs.{VfsUtilCore, VirtualFile}
+import com.intellij.psi.PsiElement
 import org.jsoup.Jsoup
 
 import scala.language.implicitConversions
@@ -61,6 +62,10 @@ object UTIL {
 
   private def evaluateToString(params: Map[String, AnyRef], file: File) = {
     Engine.evaluateFileToString(params, file)
+  }
+
+  implicit class RichPsiElement(element: PsiElement) {
+    def tokenType = Option(element).map(_.getNode.getElementType).orNull
   }
 
 }
